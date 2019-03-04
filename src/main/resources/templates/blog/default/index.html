@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="blog/default/header::head-fragment"></head>
+<body>
+<header th:replace="blog/default/header::header-fragment"></header>
+<div class="widewrapper main">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 blog-main">
+                <th:block th:if="${null != blogPageResult}">
+                    <th:block th:each="blog,iterStat : ${blogPageResult.list}">
+                        <div class="col-md-6 col-sm-6 blog-main-card">
+                            <article class="blog-summary">
+                                <header>
+                                    <a th:href="@{'/blog/' + ${blog.blogId}}">
+                                        <img th:src="@{${blog.blogCoverImage}}" alt="">
+                                        <h3>
+                                            <th:block th:text="${blog.blogTitle}"></th:block>
+                                        </h3>
+                                    </a>
+                                    <div class="blog-category">
+                                        <a th:href="@{'/category/' + ${blog.blogCategoryName}}">
+                                            <div class="blog-category-icon">
+                                                <img th:src="@{${blog.blogCategoryIcon}}" alt="">
+                                            </div>
+                                            <div class="blog-category" th:utext="${blog.blogCategoryName}">
+                                            </div>
+                                        </a>
+                                    </div>
+                                </header>
+                            </article>
+                        </div>
+                        <th:block th:if="${iterStat.last and iterStat.count%2==1}">
+                            <div class="col-md-6 col-sm-6 blog-main-card">
+                            </div>
+                        </th:block>
+                    </th:block>
+                </th:block>
+                <th:block th:if="${null != blogPageResult}">
+                    <ul class="blog-pagination">
+                        <li th:class="${blogPageResult.currPage==1}?'disabled' : ''"><a
+                                th:href="@{${blogPageResult.currPage==1}?'##':'/page/' + ${blogPageResult.currPage-1}}">&laquo;</a>
+                        </li>
+                        <li th:if="${blogPageResult.currPage-3 >=1}"><a
+                                th:href="@{'/page/' + ${blogPageResult.currPage-3}}"
+                                th:text="${blogPageResult.currPage -3}">1</a></li>
+                        <li th:if="${blogPageResult.currPage-2 >=1}"><a
+                                th:href="@{'/page/' + ${blogPageResult.currPage-2}}"
+                                th:text="${blogPageResult.currPage -2}">1</a></li>
+                        <li th:if="${blogPageResult.currPage-1 >=1}"><a
+                                th:href="@{'/page/' + ${blogPageResult.currPage-1}}"
+                                th:text="${blogPageResult.currPage -1}">1</a></li>
+                        <li class="active"><a href="#" th:text="${blogPageResult.currPage}">1</a></li>
+                        <li th:if="${blogPageResult.currPage+1 <=blogPageResult.totalPage}"><a
+                                th:href="@{'/page/' + ${blogPageResult.currPage+1}}"
+                                th:text="${blogPageResult.currPage +1}">1</a></li>
+                        <li th:if="${blogPageResult.currPage+2 <=blogPageResult.totalPage}"><a
+                                th:href="@{'/page/' + ${blogPageResult.currPage+2}}"
+                                th:text="${blogPageResult.currPage +2}">1</a></li>
+                        <li th:if="${blogPageResult.currPage+3 <=blogPageResult.totalPage}"><a
+                                th:href="@{'/page/' + ${blogPageResult.currPage+3}}"
+                                th:text="${blogPageResult.currPage +3}">1</a></li>
+                        <li th:class="${blogPageResult.currPage==blogPageResult.totalPage}?'disabled' : ''"><a
+                                th:href="@{${blogPageResult.currPage==blogPageResult.totalPage}?'##' : '/page/' + ${blogPageResult.currPage+1}}">&raquo;</a>
+                        </li>
+                    </ul>
+                </th:block>
+            </div>
+            <aside class="col-md-4 blog-aside">
+                <div class="aside-widget">
+                    <header>
+                        <h3>点击最多</h3>
+                    </header>
+                    <div class="body">
+                        <ul class="clean-list">
+                            <th:block th:if="${null != hotBlogs}">
+                                <th:block th:each="hotBlog : ${hotBlogs}">
+                                    <li><a th:href="@{'/blog/' + ${hotBlog.blogId}}">
+                                        <th:block th:text="${hotBlog.blogTitle}"></th:block>
+                                    </a></li>
+                                </th:block>
+                            </th:block>
+                        </ul>
+                    </div>
+                </div>
+                <div class="aside-widget">
+                    <header>
+                        <h3>最新发布</h3>
+                    </header>
+                    <div class="body">
+                        <ul class="clean-list">
+                            <th:block th:if="${null != newBlogs}">
+                                <th:block th:each="newBlog : ${newBlogs}">
+                                    <li><a th:href="@{'/blog/' + ${newBlog.blogId}}">
+                                        <th:block th:text="${newBlog.blogTitle}"></th:block>
+                                    </a></li>
+                                </th:block>
+                            </th:block>
+                        </ul>
+                    </div>
+                </div>
+                <div class="aside-widget">
+                    <header>
+                        <h3>标签栏</h3>
+                    </header>
+                    <div class="body clearfix">
+                        <ul class="tags">
+                            <th:block th:if="${null != hotTags}">
+                                <th:block th:each="hotTag : ${hotTags}">
+                                    <li><a th:href="@{'/tag/' + ${hotTag.tagName}}">
+                                        <th:block th:text="${hotTag.tagName}+'('+${hotTag.tagCount}+')'"></th:block>
+                                    </a></li>
+                                </th:block>
+                            </th:block>
+                        </ul>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </div>
+</div>
+<!-- 引入页脚footer-fragment -->
+<footer th:replace="blog/default/footer::footer-fragment"></footer>
+<script th:src="@{/blog/default/js/jquery.min.js}"></script>
+<script th:src="@{/blog/default/js/bootstrap.min.js}"></script>
+<script th:src="@{/blog/default/js/modernizr.js}"></script>
+<script th:src="@{/blog/default/js/search.js}"></script>
+</body>
+</html>

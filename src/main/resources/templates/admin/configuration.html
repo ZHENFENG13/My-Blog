@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<header th:replace="admin/header::header-fragment"></header>
+<body class="hold-transition sidebar-mini">
+<div class="wrapper">
+    <!-- 引入页面头header-fragment -->
+    <div th:replace="admin/header::header-nav"></div>
+    <!-- 引入工具栏sidebar-fragment -->
+    <div th:replace="admin/sidebar::sidebar-fragment(${path})"></div>
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <div class="content-header">
+            <div class="container-fluid">
+            </div><!-- /.container-fluid -->
+        </div>
+        <!-- Main content -->
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card card-primary card-outline">
+                            <div class="card-header">
+                                <h3 class="card-title">站点信息</h3>
+                            </div> <!-- /.card-body -->
+                            <div class="card-body">
+                                <form role="form" id="websiteForm">
+                                    <!-- text input -->
+                                    <div class="form-group">
+                                        <label>站点名称</label>
+                                        <input type="text" class="form-control" id="websiteName"
+                                               name="websiteName"
+                                               placeholder="站点名称" th:value="${configurations.get('websiteName')}">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>站点描述</label>
+                                        <input type="text" class="form-control" id="websiteDescription"
+                                               name="websiteDescription"
+                                               th:value="${configurations.get('websiteDescription')}"
+                                               placeholder="站点描述">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>站点Logo</label>
+                                        <input type="text" class="form-control" id="websiteLogo"
+                                               name="websiteLogo" th:value="${configurations.get('websiteLogo')}"
+                                               placeholder="站点Logo">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>favicon.ico</label>
+                                        <input type="text" class="form-control" id="websiteIcon"
+                                               th:value="${configurations.get('websiteIcon')}"
+                                               name="websiteIcon"
+                                               placeholder="favicon.ico">
+                                    </div>
+                                    <div class="card-footer">
+                                        <button type="button" id="updateWebsiteButton" onsubmit="return false;"
+                                                class="btn btn-danger float-right">确认修改
+                                        </button>
+                                    </div>
+                                </form>
+                            </div><!-- /.card-body -->
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card card-primary card-outline">
+                            <div class="card-header">
+                                <h3 class="card-title">个人信息</h3>
+                            </div> <!-- /.card-body -->
+                            <div class="card-body">
+                                <form role="form" id="userInfoForm">
+                                    <!-- input states -->
+                                    <div class="form-group">
+                                        <label class="control-label">个人头像</label>
+                                        <input type="text" class="form-control" id="yourAvatar"
+                                               name="yourAvatar" th:value="${configurations.get('yourAvatar')}"
+                                               placeholder="个人头像">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label">个人名称</label>
+                                        <input type="text" class="form-control" id="yourName"
+                                               name="yourName" th:value="${configurations.get('yourName')}"
+                                               placeholder="个人名称">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label">个人邮箱</label>
+                                        <input type="email" class="form-control" id="yourEmail" name="yourEmail"
+                                               th:value="${configurations.get('yourEmail')}"
+                                               placeholder="个人邮箱">
+                                    </div>
+                                    <div class="card-footer">
+                                        <button type="button" id="updateUserInfoButton" onsubmit="return false;"
+                                                class="btn btn-danger float-right">确认修改
+                                        </button>
+                                    </div>
+                                </form>
+                            </div><!-- /.card-body -->
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card card-primary card-outline">
+                            <div class="card-header">
+                                <h3 class="card-title">底部设置</h3>
+                            </div> <!-- /.card-body -->
+                            <div class="card-body">
+                                <form role="form" id="footerForm">
+                                    <!-- input states -->
+                                    <div class="form-group">
+                                        <label class="control-label">底部About</label>
+                                        <input type="text" class="form-control" id="footerAbout"
+                                               name="footerAbout" th:value="${configurations.get('footerAbout')}"
+                                               placeholder="About">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label">底部备案号</label>
+                                        <input type="text" class="form-control" id="footerICP" name="footerICP"
+                                               th:value="${configurations.get('footerICP')}"
+                                               placeholder="备案号">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label">底部Copy Right</label>
+                                        <input type="text" class="form-control" id="footerCopyRight"
+                                               name="footerCopyRight"
+                                               th:value="${configurations.get('footerCopyRight')}"
+                                               placeholder="Copy Right">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label">底部Powered By</label>
+                                        <input type="text" class="form-control" id="footerPoweredBy"
+                                               name="footerPoweredBy"
+                                               th:value="${configurations.get('footerPoweredBy')}"
+                                               placeholder="Powered By">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label">底部Powered By URL</label>
+                                        <input type="text" class="form-control" id="footerPoweredByURL"
+                                               name="footerPoweredByURL"
+                                               th:value="${configurations.get('footerPoweredByURL')}"
+                                               placeholder="Powered By URL">
+                                    </div>
+                                    <div class="card-footer">
+                                        <button type="button" id="updateFooterButton" onsubmit="return false;"
+                                                class="btn btn-danger float-right">确认修改
+                                        </button>
+                                    </div>
+                                </form>
+                            </div><!-- /.card-body -->
+                        </div>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </div>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+    <!-- 引入页脚footer-fragment -->
+    <div th:replace="admin/footer::footer-fragment"></div>
+</div>
+<!-- jQuery -->
+<script th:src="@{/admin/plugins/jquery/jquery.min.js}"></script>
+<!-- jQuery UI 1.11.4 -->
+<script th:src="@{/admin/plugins/jQueryUI/jquery-ui.min.js}"></script>
+<!-- Bootstrap 4 -->
+<script th:src="@{/admin/plugins/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<!-- AdminLTE App -->
+<script th:src="@{/admin/dist/js/adminlte.min.js}"></script>
+<!-- sweetalert -->
+<script th:src="@{/admin/plugins/sweetalert/sweetalert.min.js}"></script>
+<script th:src="@{/admin/dist/js/configuration.js}"></script>
+</body>
+</html>

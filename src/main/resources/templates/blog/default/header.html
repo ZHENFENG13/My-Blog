@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head-fragment">
+    <meta charset="utf-8">
+    <title th:text="|${configurations.get('websiteName')} - ${pageName}|">主页</title>
+    <meta name="description" th:content="${configurations.get('websiteDescription')}">
+    <link rel="shortcut icon" th:href="@{${configurations.get('websiteIcon')}}"/>
+    <meta name="viewport" content="width=device-width">
+    <!-- Bootstrap styles -->
+    <link rel="stylesheet" th:href="@{/blog/default/css/bootstrap.min.css}">
+    <!-- Font-Awesome -->
+    <link rel="stylesheet" th:href="@{/blog/default/css/font-awesome/css/font-awesome.min.css}">
+    <!-- Styles -->
+    <link rel="stylesheet" th:href="@{/blog/default/css/style.css}" id="theme-styles">
+    <!--[if lt IE 9]>
+    <script th:src="@{/blog/default/js/respond.js}"></script>
+    <![endif]-->
+</head>
+<header th:fragment="header-fragment">
+    <div class="widewrapper masthead">
+        <div class="container">
+            <a th:href="@{/index}" id="logo">
+                <img th:src="@{${configurations.get('websiteLogo')}}" class="logo-img" alt="my personal blog">
+            </a>
+            <div id="mobile-nav-toggle" class="pull-right">
+                <a href="#" data-toggle="collapse" data-target=".clean-nav .navbar-collapse">
+                    <i class="fa fa-bars"></i>
+                </a>
+            </div>
+            <nav class="pull-right clean-nav">
+                <div class="collapse navbar-collapse">
+                    <ul class="nav nav-pills navbar-nav">
+                        <li>
+                            <a th:href="@{/index}">主页</a>
+                        </li>
+                        <li>
+                            <a th:href="@{/link}">友链</a>
+                        </li>
+                        <li>
+                            <a th:href="@{/about}">关于</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+        </div>
+    </div>
+
+    <div class="widewrapper subheader">
+        <div class="container">
+            <div class="clean-breadcrumb">
+                <th:block th:text="${pageName}"></th:block>
+                <th:block th:if="${null != keyword}" th:text="' : '+${keyword}"></th:block>
+            </div>
+            <div class="clean-searchbox">
+                <form method="get" onsubmit="return false;" accept-charset="utf-8">
+                    <input class="searchfield" id="searchbox" type="text" placeholder="  搜索">
+                    <button class="searchbutton" id="searchbutton" onclick="search()">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- /.header -->
+</html>
