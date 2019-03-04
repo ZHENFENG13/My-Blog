@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.site.blog.my.core.dao.BlogTagRelationMapper">
+    <resultMap id="BaseResultMap" type="com.site.blog.my.core.entity.BlogTagRelation">
+        <id column="relation_id" jdbcType="BIGINT" property="relationId"/>
+        <result column="blog_id" jdbcType="BIGINT" property="blogId"/>
+        <result column="tag_id" jdbcType="INTEGER" property="tagId"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    relation_id, blog_id, tag_id, create_time
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from tb_blog_tag_relation
+        where relation_id = #{relationId,jdbcType=BIGINT}
+    </select>
+
+    <select id="selectByBlogIdAndTagId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from tb_blog_tag_relation
+        where blog_id = #{blogId,jdbcType=BIGINT} and tag_id = #{tagId,jdbcType=INTEGER} limit 1
+    </select>
+
+    <select id="selectDistinctTagIds" resultType="java.lang.Long">
+        select
+        DISTINCT(tag_id)
+        from tb_blog_tag_relation
+        where tag_id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from tb_blog_tag_relation
+    where relation_id = #{relationId,jdbcType=BIGINT}
+  </delete>
+    <delete id="deleteByBlogId" parameterType="java.lang.Long">
+        delete from tb_blog_tag_relation
+        where blog_id = #{blogId,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" parameterType="com.site.blog.my.core.entity.BlogTagRelation">
+    insert into tb_blog_tag_relation (relation_id, blog_id, tag_id,
+      create_time)
+    values (#{relationId,jdbcType=BIGINT}, #{blogId,jdbcType=BIGINT}, #{tagId,jdbcType=INTEGER},
+      #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+    <insert id="insertSelective" parameterType="com.site.blog.my.core.entity.BlogTagRelation">
+        insert into tb_blog_tag_relation
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="relationId != null">
+                relation_id,
+            </if>
+            <if test="blogId != null">
+                blog_id,
+            </if>
+            <if test="tagId != null">
+                tag_id,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="relationId != null">
+                #{relationId,jdbcType=BIGINT},
+            </if>
+            <if test="blogId != null">
+                #{blogId,jdbcType=BIGINT},
+            </if>
+            <if test="tagId != null">
+                #{tagId,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <insert id="batchInsert" parameterType="java.util.List">
+        INSERT into tb_blog_tag_relation(blog_id,tag_id)
+        VALUES
+        <foreach collection="relationList" item="item" separator=",">
+            (#{item.blogId,jdbcType=BIGINT},#{item.tagId,jdbcType=INTEGER})
+        </foreach>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.site.blog.my.core.entity.BlogTagRelation">
+        update tb_blog_tag_relation
+        <set>
+            <if test="blogId != null">
+                blog_id = #{blogId,jdbcType=BIGINT},
+            </if>
+            <if test="tagId != null">
+                tag_id = #{tagId,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where relation_id = #{relationId,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.site.blog.my.core.entity.BlogTagRelation">
+    update tb_blog_tag_relation
+    set blog_id = #{blogId,jdbcType=BIGINT},
+      tag_id = #{tagId,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where relation_id = #{relationId,jdbcType=BIGINT}
+  </update>
+</mapper>

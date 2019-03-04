@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.site.blog.my.core.dao.BlogLinkMapper">
+    <resultMap id="BaseResultMap" type="com.site.blog.my.core.entity.BlogLink">
+        <id column="link_id" jdbcType="INTEGER" property="linkId"/>
+        <result column="link_type" jdbcType="TINYINT" property="linkType"/>
+        <result column="link_name" jdbcType="VARCHAR" property="linkName"/>
+        <result column="link_url" jdbcType="VARCHAR" property="linkUrl"/>
+        <result column="link_description" jdbcType="VARCHAR" property="linkDescription"/>
+        <result column="link_rank" jdbcType="INTEGER" property="linkRank"/>
+        <result column="is_deleted" jdbcType="TINYINT" property="isDeleted"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    link_id, link_type, link_name, link_url, link_description, link_rank, is_deleted, 
+    create_time
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from tb_link
+        where link_id = #{linkId,jdbcType=INTEGER} AND is_deleted = 0
+    </select>
+
+    <update id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    UPDATE tb_link SET is_deleted = 1
+    where link_id = #{linkId,jdbcType=INTEGER} AND is_deleted = 0
+    </update>
+
+    <update id="deleteBatch">
+        update tb_link
+        set is_deleted=1 where link_id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </update>
+
+    <select id="findLinkList" parameterType="Map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from tb_link
+        where is_deleted=0
+        order by link_id desc
+        <if test="start!=null and limit!=null">
+            limit #{start},#{limit}
+        </if>
+    </select>
+
+    <select id="getTotalLinks" parameterType="Map" resultType="int">
+        select count(*)  from tb_link
+        where is_deleted=0
+    </select>
+
+    <insert id="insert" parameterType="com.site.blog.my.core.entity.BlogLink">
+    insert into tb_link (link_id, link_type, link_name, 
+      link_url, link_description, link_rank, 
+      is_deleted, create_time)
+    values (#{linkId,jdbcType=INTEGER}, #{linkType,jdbcType=TINYINT}, #{linkName,jdbcType=VARCHAR}, 
+      #{linkUrl,jdbcType=VARCHAR}, #{linkDescription,jdbcType=VARCHAR}, #{linkRank,jdbcType=INTEGER}, 
+      #{isDeleted,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP})
+    </insert>
+    <insert id="insertSelective" parameterType="com.site.blog.my.core.entity.BlogLink">
+        insert into tb_link
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="linkId != null">
+                link_id,
+            </if>
+            <if test="linkType != null">
+                link_type,
+            </if>
+            <if test="linkName != null">
+                link_name,
+            </if>
+            <if test="linkUrl != null">
+                link_url,
+            </if>
+            <if test="linkDescription != null">
+                link_description,
+            </if>
+            <if test="linkRank != null">
+                link_rank,
+            </if>
+            <if test="isDeleted != null">
+                is_deleted,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="linkId != null">
+                #{linkId,jdbcType=INTEGER},
+            </if>
+            <if test="linkType != null">
+                #{linkType,jdbcType=TINYINT},
+            </if>
+            <if test="linkName != null">
+                #{linkName,jdbcType=VARCHAR},
+            </if>
+            <if test="linkUrl != null">
+                #{linkUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="linkDescription != null">
+                #{linkDescription,jdbcType=VARCHAR},
+            </if>
+            <if test="linkRank != null">
+                #{linkRank,jdbcType=INTEGER},
+            </if>
+            <if test="isDeleted != null">
+                #{isDeleted,jdbcType=TINYINT},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.site.blog.my.core.entity.BlogLink">
+        update tb_link
+        <set>
+            <if test="linkType != null">
+                link_type = #{linkType,jdbcType=TINYINT},
+            </if>
+            <if test="linkName != null">
+                link_name = #{linkName,jdbcType=VARCHAR},
+            </if>
+            <if test="linkUrl != null">
+                link_url = #{linkUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="linkDescription != null">
+                link_description = #{linkDescription,jdbcType=VARCHAR},
+            </if>
+            <if test="linkRank != null">
+                link_rank = #{linkRank,jdbcType=INTEGER},
+            </if>
+            <if test="isDeleted != null">
+                is_deleted = #{isDeleted,jdbcType=TINYINT},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where link_id = #{linkId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.site.blog.my.core.entity.BlogLink">
+    update tb_link
+    set link_type = #{linkType,jdbcType=TINYINT},
+      link_name = #{linkName,jdbcType=VARCHAR},
+      link_url = #{linkUrl,jdbcType=VARCHAR},
+      link_description = #{linkDescription,jdbcType=VARCHAR},
+      link_rank = #{linkRank,jdbcType=INTEGER},
+      is_deleted = #{isDeleted,jdbcType=TINYINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where link_id = #{linkId,jdbcType=INTEGER}
+  </update>
+</mapper>

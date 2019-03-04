@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.site.blog.my.core.dao.BlogCommentMapper">
+    <resultMap id="BaseResultMap" type="com.site.blog.my.core.entity.BlogComment">
+        <id column="comment_id" jdbcType="BIGINT" property="commentId"/>
+        <result column="blog_id" jdbcType="BIGINT" property="blogId"/>
+        <result column="commentator" jdbcType="VARCHAR" property="commentator"/>
+        <result column="email" jdbcType="VARCHAR" property="email"/>
+        <result column="website_url" jdbcType="VARCHAR" property="websiteUrl"/>
+        <result column="comment_body" jdbcType="VARCHAR" property="commentBody"/>
+        <result column="comment_create_time" jdbcType="TIMESTAMP" property="commentCreateTime"/>
+        <result column="commentator_ip" jdbcType="VARCHAR" property="commentatorIp"/>
+        <result column="reply_body" jdbcType="VARCHAR" property="replyBody"/>
+        <result column="reply_create_time" jdbcType="TIMESTAMP" property="replyCreateTime"/>
+        <result column="comment_status" jdbcType="TINYINT" property="commentStatus"/>
+        <result column="is_deleted" jdbcType="TINYINT" property="isDeleted"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    comment_id, blog_id, commentator, email, website_url, comment_body, comment_create_time, 
+    commentator_ip, reply_body, reply_create_time, comment_status, is_deleted
+  </sql>
+    <select id="findBlogCommentList" parameterType="Map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from tb_blog_comment
+        where is_deleted=0
+        <if test="blogId!=null">
+            AND blog_id = #{blogId}
+        </if>
+        <if test="commentStatus!=null">
+            AND comment_status = #{commentStatus}
+        </if>
+        order by comment_id desc
+        <if test="start!=null and limit!=null">
+            limit #{start},#{limit}
+        </if>
+    </select>
+
+    <select id="getTotalBlogComments" parameterType="Map" resultType="int">
+        select count(*) from tb_blog_comment
+        where is_deleted=0
+        <if test="blogId!=null">
+            AND blog_id = #{blogId}
+        </if>
+        <if test="commentStatus!=null">
+            AND comment_status = #{commentStatus}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from tb_blog_comment
+        where comment_id = #{commentId,jdbcType=BIGINT} and is_deleted=0
+    </select>
+    <update id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    update tb_blog_comment set is_deleted=1
+    where comment_id = #{commentId,jdbcType=BIGINT} and is_deleted=0
+  </update>
+    <update id="checkDone">
+        update tb_blog_comment
+        set comment_status=1 where comment_id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+        and comment_status = 0
+    </update>
+    <update id="deleteBatch">
+        update tb_blog_comment
+        set is_deleted=1 where comment_id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </update>
+    <insert id="insert" parameterType="com.site.blog.my.core.entity.BlogComment">
+    insert into tb_blog_comment (comment_id, blog_id, commentator, 
+      email, website_url, comment_body, 
+      comment_create_time, commentator_ip, reply_body, 
+      reply_create_time, comment_status, is_deleted
+      )
+    values (#{commentId,jdbcType=BIGINT}, #{blogId,jdbcType=BIGINT}, #{commentator,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR}, #{websiteUrl,jdbcType=VARCHAR}, #{commentBody,jdbcType=VARCHAR}, 
+      #{commentCreateTime,jdbcType=TIMESTAMP}, #{commentatorIp,jdbcType=VARCHAR}, #{replyBody,jdbcType=VARCHAR}, 
+      #{replyCreateTime,jdbcType=TIMESTAMP}, #{commentStatus,jdbcType=TINYINT}, #{isDeleted,jdbcType=TINYINT}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.site.blog.my.core.entity.BlogComment">
+        insert into tb_blog_comment
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="commentId != null">
+                comment_id,
+            </if>
+            <if test="blogId != null">
+                blog_id,
+            </if>
+            <if test="commentator != null">
+                commentator,
+            </if>
+            <if test="email != null">
+                email,
+            </if>
+            <if test="websiteUrl != null">
+                website_url,
+            </if>
+            <if test="commentBody != null">
+                comment_body,
+            </if>
+            <if test="commentCreateTime != null">
+                comment_create_time,
+            </if>
+            <if test="commentatorIp != null">
+                commentator_ip,
+            </if>
+            <if test="replyBody != null">
+                reply_body,
+            </if>
+            <if test="replyCreateTime != null">
+                reply_create_time,
+            </if>
+            <if test="commentStatus != null">
+                comment_status,
+            </if>
+            <if test="isDeleted != null">
+                is_deleted,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="commentId != null">
+                #{commentId,jdbcType=BIGINT},
+            </if>
+            <if test="blogId != null">
+                #{blogId,jdbcType=BIGINT},
+            </if>
+            <if test="commentator != null">
+                #{commentator,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null">
+                #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="websiteUrl != null">
+                #{websiteUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="commentBody != null">
+                #{commentBody,jdbcType=VARCHAR},
+            </if>
+            <if test="commentCreateTime != null">
+                #{commentCreateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="commentatorIp != null">
+                #{commentatorIp,jdbcType=VARCHAR},
+            </if>
+            <if test="replyBody != null">
+                #{replyBody,jdbcType=VARCHAR},
+            </if>
+            <if test="replyCreateTime != null">
+                #{replyCreateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="commentStatus != null">
+                #{commentStatus,jdbcType=TINYINT},
+            </if>
+            <if test="isDeleted != null">
+                #{isDeleted,jdbcType=TINYINT},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.site.blog.my.core.entity.BlogComment">
+        update tb_blog_comment
+        <set>
+            <if test="blogId != null">
+                blog_id = #{blogId,jdbcType=BIGINT},
+            </if>
+            <if test="commentator != null">
+                commentator = #{commentator,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null">
+                email = #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="websiteUrl != null">
+                website_url = #{websiteUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="commentBody != null">
+                comment_body = #{commentBody,jdbcType=VARCHAR},
+            </if>
+            <if test="commentCreateTime != null">
+                comment_create_time = #{commentCreateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="commentatorIp != null">
+                commentator_ip = #{commentatorIp,jdbcType=VARCHAR},
+            </if>
+            <if test="replyBody != null">
+                reply_body = #{replyBody,jdbcType=VARCHAR},
+            </if>
+            <if test="replyCreateTime != null">
+                reply_create_time = #{replyCreateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="commentStatus != null">
+                comment_status = #{commentStatus,jdbcType=TINYINT},
+            </if>
+            <if test="isDeleted != null">
+                is_deleted = #{isDeleted,jdbcType=TINYINT},
+            </if>
+        </set>
+        where comment_id = #{commentId,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.site.blog.my.core.entity.BlogComment">
+    update tb_blog_comment
+    set blog_id = #{blogId,jdbcType=BIGINT},
+      commentator = #{commentator,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      website_url = #{websiteUrl,jdbcType=VARCHAR},
+      comment_body = #{commentBody,jdbcType=VARCHAR},
+      comment_create_time = #{commentCreateTime,jdbcType=TIMESTAMP},
+      commentator_ip = #{commentatorIp,jdbcType=VARCHAR},
+      reply_body = #{replyBody,jdbcType=VARCHAR},
+      reply_create_time = #{replyCreateTime,jdbcType=TIMESTAMP},
+      comment_status = #{commentStatus,jdbcType=TINYINT},
+      is_deleted = #{isDeleted,jdbcType=TINYINT}
+    where comment_id = #{commentId,jdbcType=BIGINT}
+  </update>
+</mapper>

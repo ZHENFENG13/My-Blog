@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.site.blog.my.core.dao.BlogTagMapper">
+    <resultMap id="BaseResultMap" type="com.site.blog.my.core.entity.BlogTag">
+        <id column="tag_id" jdbcType="INTEGER" property="tagId"/>
+        <result column="tag_name" jdbcType="VARCHAR" property="tagName"/>
+        <result column="is_deleted" jdbcType="TINYINT" property="isDeleted"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+    </resultMap>
+    <resultMap id="BaseCountResultMap" type="com.site.blog.my.core.entity.BlogTagCount">
+        <id column="tag_id" jdbcType="INTEGER" property="tagId"/>
+        <result column="tag_count" jdbcType="INTEGER" property="tagCount"/>
+        <result column="tag_name" jdbcType="VARCHAR" property="tagName"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    tag_id, tag_name, is_deleted, create_time
+  </sql>
+
+    <select id="findTagList" parameterType="Map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from tb_blog_tag
+        where is_deleted=0
+        order by tag_id desc
+        <if test="start!=null and limit!=null">
+            limit #{start},#{limit}
+        </if>
+    </select>
+
+    <select id="getTagCount" resultMap="BaseCountResultMap">
+        SELECT t_r.*,t.tag_name FROM
+        (SELECT r.tag_id,r.tag_count FROM
+        (SELECT tag_id ,COUNT(*) AS tag_count FROM tb_blog_tag_relation
+        GROUP BY tag_id) AS r ORDER BY tag_count DESC LIMIT 10 ) AS t_r LEFT JOIN tb_blog_tag t ON t_r.tag_id = t.tag_id WHERE t.is_deleted=0
+    </select>
+
+    <select id="getTotalTags" parameterType="Map" resultType="int">
+    select count(*)  from tb_blog_tag
+    where is_deleted=0
+  </select>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from tb_blog_tag
+        where tag_id = #{tagId,jdbcType=INTEGER} AND is_deleted = 0
+    </select>
+
+    <select id="selectByTagName" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from tb_blog_tag
+        where tag_name = #{tagName,jdbcType=VARCHAR} AND is_deleted = 0
+    </select>
+
+    <update id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    update tb_blog_tag set is_deleted = 1
+    where tag_id = #{tagId,jdbcType=INTEGER}
+  </update>
+
+    <update id="deleteBatch">
+        update tb_blog_tag
+        set is_deleted=1 where tag_id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </update>
+
+    <insert id="batchInsertBlogTag" parameterType="java.util.List" useGeneratedKeys="true"
+            keyProperty="tagId">
+        INSERT into tb_blog_tag(tag_name)
+        VALUES
+        <foreach collection="list" item="item" separator=",">
+            (#{item.tagName,jdbcType=VARCHAR})
+        </foreach>
+    </insert>
+
+    <insert id="insert" parameterType="com.site.blog.my.core.entity.BlogTag">
+    insert into tb_blog_tag (tag_id, tag_name, is_deleted, 
+      create_time)
+    values (#{tagId,jdbcType=INTEGER}, #{tagName,jdbcType=VARCHAR}, #{isDeleted,jdbcType=TINYINT}, 
+      #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+    <insert id="insertSelective" parameterType="com.site.blog.my.core.entity.BlogTag">
+        insert into tb_blog_tag
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="tagId != null">
+                tag_id,
+            </if>
+            <if test="tagName != null">
+                tag_name,
+            </if>
+            <if test="isDeleted != null">
+                is_deleted,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="tagId != null">
+                #{tagId,jdbcType=INTEGER},
+            </if>
+            <if test="tagName != null">
+                #{tagName,jdbcType=VARCHAR},
+            </if>
+            <if test="isDeleted != null">
+                #{isDeleted,jdbcType=TINYINT},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.site.blog.my.core.entity.BlogTag">
+        update tb_blog_tag
+        <set>
+            <if test="tagName != null">
+                tag_name = #{tagName,jdbcType=VARCHAR},
+            </if>
+            <if test="isDeleted != null">
+                is_deleted = #{isDeleted,jdbcType=TINYINT},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where tag_id = #{tagId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.site.blog.my.core.entity.BlogTag">
+    update tb_blog_tag
+    set tag_name = #{tagName,jdbcType=VARCHAR},
+      is_deleted = #{isDeleted,jdbcType=TINYINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where tag_id = #{tagId,jdbcType=INTEGER}
+  </update>
+</mapper>
