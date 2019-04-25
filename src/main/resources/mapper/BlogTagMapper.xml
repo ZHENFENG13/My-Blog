@@ -30,8 +30,9 @@
     <select id="getTagCount" resultMap="BaseCountResultMap">
         SELECT t_r.*,t.tag_name FROM
         (SELECT r.tag_id,r.tag_count FROM
-        (SELECT tag_id ,COUNT(*) AS tag_count FROM tb_blog_tag_relation
-        GROUP BY tag_id) AS r ORDER BY tag_count DESC LIMIT 10 ) AS t_r LEFT JOIN tb_blog_tag t ON t_r.tag_id = t.tag_id WHERE t.is_deleted=0
+         (SELECT tag_id ,COUNT(*) AS tag_count FROM
+	      (SELECT tr.tag_id FROM tb_blog_tag_relation tr LEFT JOIN tb_blog b ON tr.blog_id = b.blog_id WHERE b.is_deleted=0)
+	        trb GROUP BY tag_id) r ORDER BY tag_count DESC LIMIT 20 ) AS t_r LEFT JOIN tb_blog_tag t ON t_r.tag_id = t.tag_id WHERE t.is_deleted=0
     </select>
 
     <select id="getTotalTags" parameterType="Map" resultType="int">
