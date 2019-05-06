@@ -79,39 +79,6 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>org.mybatis.generator</groupId>
-                <artifactId>mybatis-generator-maven-plugin</artifactId>
-                <version>1.3.5</version>
-                <dependencies>
-                    <dependency>
-                        <groupId> mysql</groupId>
-                        <artifactId>mysql-connector-java</artifactId>
-                        <version> 5.1.39</version>
-                    </dependency>
-                    <dependency>
-                        <groupId>org.mybatis.generator</groupId>
-                        <artifactId>mybatis-generator-core</artifactId>
-                        <version>1.3.5</version>
-                    </dependency>
-                </dependencies>
-                <executions>
-                    <execution>
-                        <id>Generate MyBatis Artifacts</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>generate</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <verbose>true</verbose>
-                    <!-- 是否覆盖 -->
-                    <overwrite>true</overwrite>
-                    <!-- MybatisGenerator的配置文件位置 -->
-                    <configurationFile>src/main/resources/mybatisGeneratorConfig.xml</configurationFile>
-                </configuration>
-            </plugin>
-            <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
