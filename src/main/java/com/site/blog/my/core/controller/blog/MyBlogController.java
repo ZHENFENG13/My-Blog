@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Map;
@@ -25,7 +24,9 @@ import java.util.Map;
 @Controller
 public class MyBlogController {
 
-    public static String theme = "default";
+    //public static String theme = "default";
+    //public static String theme = "yummy-jekyll";
+    public static String theme = "amaze";
     @Resource
     private BlogService blogService;
     @Resource
@@ -36,6 +37,8 @@ public class MyBlogController {
     private CommentService commentService;
     @Resource
     private ConfigService configService;
+    @Resource
+    private CategoryService categoryService;
 
     /**
      * 首页
@@ -68,11 +71,25 @@ public class MyBlogController {
     }
 
     /**
+     * Categories页面(包括分类数据和标签数据)
+     *
+     * @return
+     */
+    @GetMapping({"/categories"})
+    public String categories(HttpServletRequest request) {
+        request.setAttribute("hotTags", tagService.getBlogTagCountForIndex());
+        request.setAttribute("categories", categoryService.getAllCategories());
+        request.setAttribute("pageName", "分类页面");
+        request.setAttribute("configurations", configService.getAllConfigs());
+        return "blog/" + theme + "/category";
+    }
+
+    /**
      * 详情页
      *
      * @return
      */
-    @GetMapping({"/blog/{blogId}"})
+    @GetMapping({"/blog/{blogId}", "/article/{blogId}"})
     public String detail(HttpServletRequest request, @PathVariable("blogId") Long blogId, @RequestParam(value = "commentPage", required = false, defaultValue = "1") Integer commentPage) {
         BlogDetailVO blogDetailVO = blogService.getBlogDetail(blogId);
         if (blogDetailVO != null) {
@@ -106,6 +123,9 @@ public class MyBlogController {
         request.setAttribute("pageName", "标签");
         request.setAttribute("pageUrl", "tag");
         request.setAttribute("keyword", tagName);
+        request.setAttribute("newBlogs", blogService.getBlogListForIndexPage(1));
+        request.setAttribute("hotBlogs", blogService.getBlogListForIndexPage(0));
+        request.setAttribute("hotTags", tagService.getBlogTagCountForIndex());
         request.setAttribute("configurations", configService.getAllConfigs());
         return "blog/" + theme + "/list";
     }
@@ -132,6 +152,9 @@ public class MyBlogController {
         request.setAttribute("pageName", "分类");
         request.setAttribute("pageUrl", "category");
         request.setAttribute("keyword", categoryName);
+        request.setAttribute("newBlogs", blogService.getBlogListForIndexPage(1));
+        request.setAttribute("hotBlogs", blogService.getBlogListForIndexPage(0));
+        request.setAttribute("hotTags", tagService.getBlogTagCountForIndex());
         request.setAttribute("configurations", configService.getAllConfigs());
         return "blog/" + theme + "/list";
     }
@@ -158,6 +181,9 @@ public class MyBlogController {
         request.setAttribute("pageName", "搜索");
         request.setAttribute("pageUrl", "search");
         request.setAttribute("keyword", keyword);
+        request.setAttribute("newBlogs", blogService.getBlogListForIndexPage(1));
+        request.setAttribute("hotBlogs", blogService.getBlogListForIndexPage(0));
+        request.setAttribute("hotTags", tagService.getBlogTagCountForIndex());
         request.setAttribute("configurations", configService.getAllConfigs());
         return "blog/" + theme + "/list";
     }
@@ -220,7 +246,7 @@ public class MyBlogController {
         if (StringUtils.isEmpty(email)) {
             return ResultGenerator.genFailResult("请输入邮箱地址");
         }
-        if (!PatternUtil.isEmail(email)){
+        if (!PatternUtil.isEmail(email)) {
             return ResultGenerator.genFailResult("请输入正确的邮箱地址");
         }
         if (StringUtils.isEmpty(commentBody)) {
@@ -233,7 +259,7 @@ public class MyBlogController {
         comment.setBlogId(blogId);
         comment.setCommentator(MyBlogUtils.cleanString(commentator));
         comment.setEmail(email);
-        if (PatternUtil.isURL(websiteUrl)){
+        if (PatternUtil.isURL(websiteUrl)) {
             comment.setWebsiteUrl(websiteUrl);
         }
         comment.setCommentBody(MyBlogUtils.cleanString(commentBody));

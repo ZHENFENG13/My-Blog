@@ -16,6 +16,8 @@ public class BlogDetailVO {
 
     private String blogCategoryName;
 
+    private String blogCoverImage;
+
     private Long blogViews;
 
     private List<String> blogTags;
@@ -112,5 +114,13 @@ public class BlogDetailVO {
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
+    }
+
+    public String getBlogCoverImage() {
+        return blogCoverImage;
+    }
+
+    public void setBlogCoverImage(String blogCoverImage) {
+        this.blogCoverImage = blogCoverImage;
     }
 }
