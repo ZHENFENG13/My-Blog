@@ -31,7 +31,7 @@ import java.util.UUID;
 @RequestMapping("/admin")
 public class UploadController {
 
-    private final static String filePath = "/opt/my-blog/upload/";
+    private final static String filePath = "/opt/deploy/upload/";
 
 
     @PostMapping({"/upload/file"})

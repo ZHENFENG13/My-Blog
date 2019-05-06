@@ -18,12 +18,8 @@ public class MyBlogWebMvcConfigurer implements WebMvcConfigurer {
         registry.addInterceptor(adminLoginInterceptor).addPathPatterns("/admin/**").excludePathPatterns("/admin/login").excludePathPatterns("/admin/dist/**").excludePathPatterns("/admin/plugins/**");
     }
 
-    /**
-     * 资源映射
-     * @param registry
-     */
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/upload/**").addResourceLocations("file:/opt/my-blog/upload/");
-        registry.addResourceHandler("/md-upload/**").addResourceLocations("file:/opt/my-blog/md-upload/");
+        registry.addResourceHandler("/upload/**").addResourceLocations("file:/opt/deploy/upload/");
+        registry.addResourceHandler("/md-upload/**").addResourceLocations("file:/opt/deploy/md-upload/");
     }
 }

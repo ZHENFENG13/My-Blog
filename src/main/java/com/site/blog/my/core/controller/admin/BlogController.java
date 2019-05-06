@@ -35,7 +35,7 @@ import java.util.Random;
 @RequestMapping("/admin")
 public class BlogController {
 
-    private final static String filePath = "/opt/my-blog/md-upload/";
+    private final static String filePath = "/opt/deploy/md-upload/";
 
     @Resource
     private BlogService blogService;
