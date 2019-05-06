@@ -11,6 +11,18 @@ $('#commentSubmit').click(function () {
         });
         return;
     }
+    if (isNull(commentator)) {
+        swal("请输入你的称呼", {
+            icon: "warning",
+        });
+        return;
+    }
+    if (isNull(email)) {
+        swal("请输入你的邮箱", {
+            icon: "warning",
+        });
+        return;
+    }
     if (isNull(verifyCode)) {
         swal("请输入验证码", {
             icon: "warning",

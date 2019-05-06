@@ -4,7 +4,7 @@
     font-family: 'Monaco', Microsoft Yahei, 宋体, sans-serif;
     text-align: left;
     position: fixed; /*将div的位置固定到距离top:50px，left:0px的位置，这样div就会处在最左边的位置，距离顶部50px*/
-    top: 50px;
+    top: 15%;
     right: 0px;
     width: auto;
     height: auto;
