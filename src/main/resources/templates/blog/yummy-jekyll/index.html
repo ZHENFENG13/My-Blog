@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div th:replace="blog/yummy-jekyll/header::header('首页','My Blog')"></div>
+<body>
+<div class="content">
+    <section class="jumbotron">
+        <div class="container">
+            <h3>我不怕千万人阻挡，只怕自己投降！</h3>
+        </div>
+    </section>
+    <section class="content container">
+
+        <div class="row">
+            <!-- Post List -->
+            <div class="col-md-8">
+                <ol class="post-list">
+                    <th:block th:if="${null != blogPageResult}">
+                        <th:block th:each="blog,iterStat : ${blogPageResult.list}">
+                            <li class="post-list-item">
+                                <h3 class="post-list-title">
+                                    <a class="hvr-underline-from-center" th:href="@{'/blog/' + ${blog.blogId}}">
+                                        <th:block th:text="${blog.blogTitle}"></th:block>
+                                    </a>
+                                </h3>
+                                <p class="post-list-cover-img">
+                                    <a th:href="@{'/blog/' + ${blog.blogId}}"> <img th:src="@{${blog.blogCoverImage}}"
+                                                                                    alt=""></a>
+                                </p>
+                                <p class="post-list-meta">
+                                    <span class="octicon octicon-calendar"
+                                          th:text="${#dates.format(blog.createTime, 'yyyy-MM-dd')}"></span>
+                                </p>
+                            </li>
+                        </th:block>
+                    </th:block>
+                </ol>
+
+                <!-- Pagination -->
+                <th:block th:if="${null != blogPageResult}">
+                <ul class="pagination text-align">
+                    <li th:class="${blogPageResult.currPage==1}?'disabled' : ''"><a
+                            th:href="@{${blogPageResult.currPage==1}?'##':'/page/' + ${blogPageResult.currPage-1}}">&laquo;</a>
+                    </li>
+                    <li th:if="${blogPageResult.currPage-3 >=1}"><a
+                            th:href="@{'/page/' + ${blogPageResult.currPage-3}}"
+                            th:text="${blogPageResult.currPage -3}">1</a></li>
+                    <li th:if="${blogPageResult.currPage-2 >=1}"><a
+                            th:href="@{'/page/' + ${blogPageResult.currPage-2}}"
+                            th:text="${blogPageResult.currPage -2}">1</a></li>
+                    <li th:if="${blogPageResult.currPage-1 >=1}"><a
+                            th:href="@{'/page/' + ${blogPageResult.currPage-1}}"
+                            th:text="${blogPageResult.currPage -1}">1</a></li>
+                    <li class="active"><a href="#" th:text="${blogPageResult.currPage}">1</a></li>
+                    <li th:if="${blogPageResult.currPage+1 <=blogPageResult.totalPage}"><a
+                            th:href="@{'/page/' + ${blogPageResult.currPage+1}}"
+                            th:text="${blogPageResult.currPage +1}">1</a></li>
+                    <li th:if="${blogPageResult.currPage+2 <=blogPageResult.totalPage}"><a
+                            th:href="@{'/page/' + ${blogPageResult.currPage+2}}"
+                            th:text="${blogPageResult.currPage +2}">1</a></li>
+                    <li th:if="${blogPageResult.currPage+3 <=blogPageResult.totalPage}"><a
+                            th:href="@{'/page/' + ${blogPageResult.currPage+3}}"
+                            th:text="${blogPageResult.currPage +3}">1</a></li>
+                    <li th:class="${blogPageResult.currPage==blogPageResult.totalPage}?'disabled' : ''"><a
+                            th:href="@{${blogPageResult.currPage==blogPageResult.totalPage}?'##' : '/page/' + ${blogPageResult.currPage+1}}">&raquo;</a>
+                    </li>
+                </ul>
+                </th:block>
+            </div>
+
+            <div class="col-md-4">
+                <h3 class="sidebar-title">点击最多</h3>
+                <div id="blog-categories">
+                    <ul class="list-group">
+                        <th:block th:if="${null != hotBlogs}">
+                            <th:block th:each="hotBlog : ${hotBlogs}">
+                                <li class="list-group-item"><a th:href="@{'/blog/' + ${hotBlog.blogId}}">
+                                    <th:block th:text="${hotBlog.blogTitle}"></th:block>
+                                </a></li>
+                            </th:block>
+                        </th:block>
+                    </ul>
+                </div>
+                <h3 class="sidebar-title">最新发布</h3>
+                <div id="blog-categories">
+                    <ul class="list-group">
+                        <th:block th:if="${null != newBlogs}">
+                            <th:block th:each="newBlog : ${newBlogs}">
+                                <li class="list-group-item"><a th:href="@{'/blog/' + ${newBlog.blogId}}">
+                                    <th:block th:text="${newBlog.blogTitle}"></th:block>
+                                </a></li>
+                            </th:block>
+                        </th:block>
+                    </ul>
+                </div>
+                <h3 class="sidebar-title">标签栏</h3>
+                <div id="blog-categories">
+                    <ul class="list-group">
+                        <th:block th:if="${null != hotTags}">
+                            <th:block th:each="hotTag : ${hotTags}">
+                                <li class="list-group-item"><a th:href="@{'/tag/' + ${hotTag.tagName}}">
+                                    <th:block th:text="${hotTag.tagName}"></th:block>
+                                    <span class="badge" th:text="${hotTag.tagCount}">1</span>
+                                </a></li>
+                            </th:block>
+                        </th:block>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+</body>
+<div th:replace="blog/yummy-jekyll/footer::footer"></div>
+</html>

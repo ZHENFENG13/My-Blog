@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:fragment="header(title,keywords)">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <!-- Favicon Icon -->
+    <link rel="shortcut icon" href="../blog/assets/images/favicon.png"/>
+    <title th:text="|${configurations.get('websiteName')} - ${pageName}|">13blog.site My Blog
+    </title>
+    <meta name="description" th:content="${configurations.get('websiteDescription')}">
+    <link rel="shortcut icon" th:href="@{${configurations.get('websiteIcon')}}"/>
+    <link rel="stylesheet" th:href="@{/blog/yummy-jekyll/plugins/jquery/dist/jquery.min.js}">
+    <script type="application/javascript" th:src="@{/blog/yummy-jekyll/plugins/jquery/dist/jquery.min.js}"></script>
+    <!-- Third-Party CSS -->
+    <link rel="stylesheet" th:href="@{/blog/yummy-jekyll/plugins/bootstrap/dist/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/blog/yummy-jekyll/plugins/octicons/octicons/octicons.css}">
+    <link rel="stylesheet" th:href="@{/blog/yummy-jekyll/plugins/hover/css/hover-min.css}">
+    <link rel="stylesheet" th:href="@{/blog/yummy-jekyll/plugins/primer-markdown/dist/user-content.min.css}">
+    <link rel="stylesheet" th:href="@{/blog/yummy-jekyll/assets/css/syntax.css}">
+    <!-- My CSS -->
+    <link rel="stylesheet" th:href="@{/blog/yummy-jekyll/assets/css/common.css}">
+    <!-- CSS set in page -->
+    <link rel="stylesheet" th:href="@{/blog/yummy-jekyll/assets/css/index.css}">
+    <link rel="stylesheet" th:href="@{/blog/yummy-jekyll/assets/css/about.css}">
+    <link rel="stylesheet" th:href="@{/blog/yummy-jekyll/assets/css/blog-page.css}">
+    <link rel="stylesheet" th:href="@{/blog/yummy-jekyll/assets/css/open-source.css}">
+    <link rel="stylesheet" th:href="@{/blog/yummy-jekyll/assets/css/sidebar-popular-repo.css}">
+    <script type="text/javascript" th:src="@{/blog/yummy-jekyll/plugins/bootstrap/dist/js/bootstrap.min.js}"></script>
+</head>
+<body>
+<header class="site-header">
+    <div class="container">
+        <a id="site-header-brand" href="/" title="personal blog">
+            <span class="octicon octicon-rocket" th:text="| ${configurations.get('websiteName')}|"></span>
+        </a>
+        <nav class="site-header-nav" role="navigation">
+            <a th:href="@{/index}" class=" site-header-nav-item hvr-underline-from-center">
+                Home
+            </a>
+            <a th:href="@{/categories}" class=" site-header-nav-item hvr-underline-from-center">
+                Categories
+            </a>
+            <a th:href="@{/link}" class=" site-header-nav-item hvr-underline-from-center">
+                Links
+            </a>
+            <a th:href="@{/about}" class=" site-header-nav-item hvr-underline-from-center">
+                About
+            </a>
+            <a href="https://github.com/ZHENFENG13" class=" site-header-nav-item hvr-underline-from-center" target="_blank">
+                GitHub
+            </a>
+        </nav>
+    </div>
+</header>
+</body>
+</html>
+

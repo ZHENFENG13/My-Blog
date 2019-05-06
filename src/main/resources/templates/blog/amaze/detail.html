@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html>
+<html>
+<head>
+    <title th:text="${configurations.get('websiteName')}+' | '+${pageName}">详情页</title>
+    <meta name="description" th:content="${configurations.get('websiteDescription')}">
+    <meta name="viewport" content="width=device-width">
+    <link rel="shortcut icon" th:href="@{${configurations.get('websiteIcon')}}"/>
+    <link rel="stylesheet" th:href="@{/blog/amaze/css/base.css}">
+</head>
+<body>
+<div th:replace="blog/amaze/header::nav-fragment"></div>
+<header th:fragment="header-fragment" class="intro-header"
+        th:style="'background-image:url(' + @{/blog/amaze/images/header.jpg} + ');'">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1 th:text="${blogDetailVO.blogTitle}"></h1>
+                    <span class="meta">
+                        <th:block th:text="${#dates.format(blogDetailVO.createTime, 'yyyy-MM-dd')}"></th:block> &nbsp;
+                            <div class="comments-view" style="display: inline-block">
+                                <a href="#comments" class="article-comments"><th:block
+                                        th:text="${blogDetailVO.commentCount}"></th:block>条评论</a> &nbsp;
+                                <th:block th:text="${blogDetailVO.blogViews}"></th:block>浏览
+                            </div>
+                            </span>
+                    <div class="tags post-tags">
+                        <th:block th:each="tag : ${blogDetailVO.blogTags}">
+                            <a class="tag" rel="tag" th:href="@{'/tag/' + ${tag}}">
+                                <th:block th:text="${tag}"></th:block>
+                            </a>&nbsp;
+                        </th:block>
+                    </div>
+                </div>
+            </div>
+        </div>
+</header>
+<div class="container">
+    <div class="am-g am-g-fixed blog-fixed">
+        <div class="am-u-lg-12 am-u-sm-12">
+            <article class="am-article blog-article-p article-trigger">
+                <div id="post-content" class="am-article-bd article-body">
+                    <th:block th:utext="${blogDetailVO.blogContent}"/>
+                    <aside class="blog-rights clearfix">
+                        <p>本站文章除注明转载/出处外，皆为作者原创，欢迎转载，但未经作者同意必须保留此段声明，且在文章页面明显位置给出原文连接，否则保留追究法律责任的权利。</p>
+                    </aside>
+                </div>
+            </article>
+            <hr>
+        </div>
+    </div>
+    <aside class="comments" id="comments">
+        <th:block th:if="${null != commentPageResult}">
+            <th:block th:each="comment,iterStat : ${commentPageResult.list}">
+                <article class="comment">
+                    <header class="clearfix">
+                        <img th:src="@{/blog/default/img/avatar.png}" class="avatar">
+                        <div class="meta">
+                            <h3 th:text="${comment.commentator}"></h3>
+                            <span class="date">
+                                       留言时间：<th:block
+                                    th:text="${#dates.format(comment.commentCreateTime, 'yyyy-MM-dd HH:mm:ss')}"></th:block>
+                                    </span>
+                        </div>
+                    </header>
+                    <div class="body">
+                        <th:block th:text="${comment.commentBody}"></th:block>
+                    </div>
+                </article>
+                <th:block th:unless="${#strings.isEmpty(comment.replyBody)}">
+                    <article class="comment reply">
+                        <header class="clearfix">
+                            <img th:src="@{${configurations.get('yourAvatar')}}"
+                                 style="float: left;border-radius: 100px;width: 50px;">
+                            <div class="meta2">
+                                <h3 th:text="${configurations.get('yourName')}">十三</h3>
+                                <span class="date">
+                                        回复时间： <th:block
+                                        th:text="${#dates.format(comment.replyCreateTime, 'yyyy-MM-dd HH:mm:ss')}"></th:block>
+                                    </span>
+
+                            </div>
+                        </header>
+                        <div class="reply-body">
+                            <th:block th:text="${comment.replyBody}"></th:block>
+                        </div>
+                    </article>
+                </th:block>
+            </th:block>
+        </th:block>
+        <th:block th:if="${null != commentPageResult}">
+            <ul class="am-pagination">
+                <li th:class="${commentPageResult.currPage==1}?'disabled' : ''"><a
+                        th:href="@{${commentPageResult.currPage==1}?'##':'/blog/'+${blogDetailVO.blogId}+'?commentPage=' + ${commentPageResult.currPage-1}+'#comments'}">&laquo;</a>
+                </li>
+                <li th:if="${commentPageResult.currPage-3 >=1}"><a
+                        th:href="@{'/blog/'+${blogDetailVO.blogId}+'?commentPage=' + ${commentPageResult.currPage-3}+'#comments'}"
+                        th:text="${commentPageResult.currPage -3}">1</a></li>
+                <li th:if="${commentPageResult.currPage-2 >=1}"><a
+                        th:href="@{'/blog/'+${blogDetailVO.blogId}+'?commentPage=' + ${commentPageResult.currPage-2}+'#comments'}"
+                        th:text="${commentPageResult.currPage -2}">1</a></li>
+                <li th:if="${commentPageResult.currPage-1 >=1}"><a
+                        th:href="@{'/blog/'+${blogDetailVO.blogId}+'?commentPage=' + ${commentPageResult.currPage-1}+'#comments'}"
+                        th:text="${commentPageResult.currPage -1}">1</a></li>
+                <li class="active"><a href="#" th:text="${commentPageResult.currPage}">1</a></li>
+                <li th:if="${commentPageResult.currPage+1 <=commentPageResult.totalPage}"><a
+                        th:href="@{'/blog/'+${blogDetailVO.blogId}+'?commentPage=' + ${commentPageResult.currPage+1}+'#comments'}"
+                        th:text="${commentPageResult.currPage +1}">1</a></li>
+                <li th:if="${commentPageResult.currPage+2 <=commentPageResult.totalPage}"><a
+                        th:href="@{'/blog/'+${blogDetailVO.blogId}+'?commentPage=' + ${commentPageResult.currPage+2}+'#comments'}"
+                        th:text="${commentPageResult.currPage +2}">1</a></li>
+                <li th:if="${commentPageResult.currPage+3 <=commentPageResult.totalPage}"><a
+                        th:href="@{'/blog/'+${blogDetailVO.blogId}+'?commentPage=' + ${commentPageResult.currPage+3}+'#comments'}"
+                        th:text="${commentPageResult.currPage +3}">1</a></li>
+                <li th:class="${commentPageResult.currPage==commentPageResult.totalPage}?'disabled' : ''"><a
+                        th:href="@{${commentPageResult.currPage==commentPageResult.totalPage}?'##' : '/blog/'+${blogDetailVO.blogId}+'?commentPage=' + ${commentPageResult.currPage+1}+'#comments'}">&raquo;</a>
+                </li>
+            </ul>
+        </th:block>
+    </aside>
+    <th:block th:if="${blogDetailVO.enableComment==0}">
+        <aside class="create-comment" id="create-comment">
+            <hr>
+            <h2><i class="fa fa-pencil"></i> 添加评论</h2>
+            <table id="commentForm" class="form">
+                <tbody>
+                <tr>
+                    <td>
+                        <input type="hidden" id="blogId" name="blogId" th:value="${blogDetailVO.blogId}"></input>
+                        <input type="text" name="commentator" id="commentator" placeholder="(*必填)怎么称呼你?">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="email" name="email" id="email" placeholder="(*必填)你的联系邮箱">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="text" name="websiteUrl" id="websiteUrl" placeholder="你的网站地址(可不填)">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input style="width:50%" type="text" name="verifyCode" id="verifyCode"
+                               placeholder="(*必填)请输入验证码">&nbsp;&nbsp;
+                        <img alt="单击图片刷新！" class="pointer" style="margin-top: 15px; border-radius: 25px;"
+                             th:src="@{/common/kaptcha}"
+                             onclick="this.src='/common/kaptcha?d='+new Date()*1">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <textarea rows="5" name="commentBody" id="commentBody" placeholder="(*必填)请输入你的留言"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center">
+                        <button id="commentSubmit" type="submit"
+                                class="submit am-btn am-btn-primary">提交
+                        </button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </aside>
+    </th:block>
+    <p class="back-top" id="back-top" style="display:none"><a href="#top"><span></span></a></p>
+</div>
+<footer th:replace="blog/amaze/footer::footer-fragment"></footer>
+</body>
+<script th:src="@{/blog/default/js/jquery.min.js}"></script>
+<script th:src="@{/blog/plugins/highlight/highlight.pack.js}"></script>
+<script th:src="@{/blog/plugins/dictionary/dictionary.js}"></script>
+<script th:src="@{/blog/plugins/comment/valid.js}"></script>
+<script th:src="@{/blog/plugins/comment/comment.js}"></script>
+<!-- sweetalert -->
+<script th:src="@{/admin/plugins/sweetalert/sweetalert.min.js}"></script>
+<script>
+    $(function () {
+        $("#back-top").hide();
+        $(window).scroll(function () {
+            if ($(this).scrollTop() > 300) {
+                $('#back-top').fadeIn();
+            } else {
+                $('#back-top').fadeOut();
+            }
+        });
+        // scroll body to 0px on click
+        $('#back-top a').click(function () {
+            $('body,html').animate({
+                scrollTop: 0
+            }, 800);
+            return false;
+        });
+
+        $('pre code').each(function (i, block) {
+            hljs.highlightBlock(block);
+        });
+
+        $('article h1, article h2, article h3, article h4, article h5').find('a').removeAttr('target')
+    })
+</script>
+</html>

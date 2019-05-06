@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div th:replace="blog/yummy-jekyll/header::header('详情页','详情')"></div>
+<body>
+<div class="content">
+    <section class="jumbotron"
+             th:style="'background:url(' + @{/blog/yummy-jekyll/assets/images/read.jpg} + ');background-repeat:no-repeat;background-size:100% 100%;background-attachment: fixed;'">
+        <div class="container">
+            <div id="jumbotron-meta-info">
+                <h2 th:text="${blogDetailVO.blogTitle}">标题</h2>
+                <span class="meta-info">
+                        <span class="octicon octicon-calendar">&nbsp;<th:block
+                                th:text="${#dates.format(blogDetailVO.createTime, 'yyyy-MM-dd')}"></th:block></span>
+                    &nbsp;&nbsp;<span class="octicon octicon-comment">&nbsp;<th:block
+                        th:text="${blogDetailVO.commentCount}"></th:block> 条评论</span>
+                    &nbsp;&nbsp;<span class="octicon octicon-eye-watch">&nbsp;<th:block
+                        th:text="${blogDetailVO.blogViews}"></th:block>
+                             浏览</span>
+                </span>
+                <br>
+                <br>
+                <span class="meta-info">
+                       <th:block th:each="tag : ${blogDetailVO.blogTags}">
+                        <a th:href="@{'/tag/' + ${tag}}" role="button" class="btn btn-primary hvr-grow-shadow">
+                            <span class="flag-icon flag-icon-bl" th:text="${tag}"></span></a>
+                       </th:block>
+                    </span>
+            </div>
+        </div>
+    </section>
+    <article class="post container">
+        <div class="row" id="blog-content">
+            <div class="col-md-12 markdown-body">
+                <th:block th:utext="${blogDetailVO.blogContent}"/>
+                <!-- Comments -->
+                <aside class="blog-rights clearfix">
+                    <p>本站文章除注明转载/出处外，皆为作者原创，欢迎转载，但未经作者同意必须保留此段声明，且在文章页面明显位置给出原文连接，否则保留追究法律责任的权利。</p>
+                </aside>
+
+                <aside class="comments" id="comments">
+                    <th:block th:if="${null != commentPageResult}">
+                        <th:block th:each="comment,iterStat : ${commentPageResult.list}">
+                            <article class="comment">
+                                <header class="clearfix">
+                                    <img th:src="@{/blog/default/img/avatar.png}" class="avatar">
+                                    <div class="meta">
+                                        <h4 th:text="${comment.commentator}"></h4>
+                                        <span class="date">
+                                       留言时间：<th:block
+                                                th:text="${#dates.format(comment.commentCreateTime, 'yyyy-MM-dd HH:mm:ss')}"></th:block>
+                                    </span>
+                                    </div>
+                                </header>
+                                <div class="body">
+                                    <th:block th:text="${comment.commentBody}"></th:block>
+                                </div>
+                            </article>
+                            <th:block th:unless="${#strings.isEmpty(comment.replyBody)}">
+                                <article class="comment reply">
+                                    <header class="clearfix">
+                                        <img th:src="@{${configurations.get('yourAvatar')}}"
+                                             style="float: left;border-radius: 100px;width: 50px;">
+                                        <div class="meta2">
+                                            <h4 th:text="${configurations.get('yourName')}">十三</h4>
+                                            <span class="date">
+                                        回复时间： <th:block
+                                                    th:text="${#dates.format(comment.replyCreateTime, 'yyyy-MM-dd HH:mm:ss')}"></th:block>
+                                    </span>
+
+                                        </div>
+                                    </header>
+                                    <div class="reply-body">
+                                        <th:block th:text="${comment.replyBody}"></th:block>
+                                    </div>
+                                </article>
+                            </th:block>
+                        </th:block>
+                    </th:block>
+                    <th:block th:if="${null != commentPageResult}">
+                        <ul class="pagination text-align">
+                            <li th:class="${commentPageResult.currPage==1}?'disabled' : ''"><a
+                                    th:href="@{${commentPageResult.currPage==1}?'##':'/blog/'+${blogDetailVO.blogId}+'?commentPage=' + ${commentPageResult.currPage-1}+'#comments'}">&laquo;</a>
+                            </li>
+                            <li th:if="${commentPageResult.currPage-3 >=1}"><a
+                                    th:href="@{'/blog/'+${blogDetailVO.blogId}+'?commentPage=' + ${commentPageResult.currPage-3}+'#comments'}"
+                                    th:text="${commentPageResult.currPage -3}">1</a></li>
+                            <li th:if="${commentPageResult.currPage-2 >=1}"><a
+                                    th:href="@{'/blog/'+${blogDetailVO.blogId}+'?commentPage=' + ${commentPageResult.currPage-2}+'#comments'}"
+                                    th:text="${commentPageResult.currPage -2}">1</a></li>
+                            <li th:if="${commentPageResult.currPage-1 >=1}"><a
+                                    th:href="@{'/blog/'+${blogDetailVO.blogId}+'?commentPage=' + ${commentPageResult.currPage-1}+'#comments'}"
+                                    th:text="${commentPageResult.currPage -1}">1</a></li>
+                            <li class="active"><a href="#" th:text="${commentPageResult.currPage}">1</a></li>
+                            <li th:if="${commentPageResult.currPage+1 <=commentPageResult.totalPage}"><a
+                                    th:href="@{'/blog/'+${blogDetailVO.blogId}+'?commentPage=' + ${commentPageResult.currPage+1}+'#comments'}"
+                                    th:text="${commentPageResult.currPage +1}">1</a></li>
+                            <li th:if="${commentPageResult.currPage+2 <=commentPageResult.totalPage}"><a
+                                    th:href="@{'/blog/'+${blogDetailVO.blogId}+'?commentPage=' + ${commentPageResult.currPage+2}+'#comments'}"
+                                    th:text="${commentPageResult.currPage +2}">1</a></li>
+                            <li th:if="${commentPageResult.currPage+3 <=commentPageResult.totalPage}"><a
+                                    th:href="@{'/blog/'+${blogDetailVO.blogId}+'?commentPage=' + ${commentPageResult.currPage+3}+'#comments'}"
+                                    th:text="${commentPageResult.currPage +3}">1</a></li>
+                            <li th:class="${commentPageResult.currPage==commentPageResult.totalPage}?'disabled' : ''"><a
+                                    th:href="@{${commentPageResult.currPage==commentPageResult.totalPage}?'##' : '/blog/'+${blogDetailVO.blogId}+'?commentPage=' + ${commentPageResult.currPage+1}+'#comments'}">&raquo;</a>
+                            </li>
+                        </ul>
+                    </th:block>
+                </aside>
+
+            </div>
+        </div>
+        <th:block th:if="${blogDetailVO.enableComment==0}">
+            <aside class="create-comment" id="create-comment">
+                <hr>
+                <h2><span class="octicon octicon-pencil"> 添加评论</span></h2>
+                <form action="#" method="get" onsubmit="return false;" accept-charset="utf-8">
+                    <input type="hidden" id="blogId" name="blogId" th:value="${blogDetailVO.blogId}"></input>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <input type="text" name="commentator" id="commentator" placeholder="(*必填)怎么称呼你?"
+                                   class="form-control input-lg">
+                        </div>
+                        <div class="col-md-6">
+                            <input type="email" name="email" id="email" placeholder="(*必填)你的联系邮箱"
+                                   class="form-control input-lg">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <input type="text" name="websiteUrl" id="websiteUrl" placeholder="你的网站地址(可不填)"
+                                   class="form-control input-lg">
+                        </div>
+                        <div class="col-md-6">
+                            <div class="col-md-4">
+                                <img alt="单击图片刷新！" class="pointer" style="margin-top: 15px; border-radius: 25px;"
+                                     th:src="@{/common/kaptcha}"
+                                     onclick="this.src='/common/kaptcha?d='+new Date()*1">
+                            </div>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control input-lg" name="verifyCode" id="verifyCode"
+                                       placeholder="(*必填)请输入验证码"
+                                       required="true">
+                            </div>
+                        </div>
+                    </div>
+                    <textarea rows="10" name="commentBody" id="commentBody" placeholder="(*必填)请输入你的留言"
+                              class="form-control input-lg"></textarea>
+
+                    <div class="buttons clearfix">
+                        <button type="submit" id="commentSubmit" class="btn btn-xlarge btn-clean-one">提交</button>
+                    </div>
+                </form>
+            </aside>
+        </th:block>
+    </article>
+</div>
+</body>
+<div th:replace="blog/yummy-jekyll/footer::footer"></div>
+<!-- highlight -->
+<link rel="stylesheet" th:href="@{/blog/plugins/highlight/styles/github.css}">
+<!-- dictionary -->
+<link rel="stylesheet" th:href="@{/blog/plugins/dictionary/dictionary.css}">
+<!-- sweetalert -->
+<link rel="stylesheet" th:href="@{/admin/plugins/sweetalert/sweetalert.css}"/>
+<script th:src="@{/blog/default/js/modernizr.js}"></script>
+<script th:src="@{/blog/plugins/highlight/highlight.pack.js}"></script>
+<script th:src="@{/blog/plugins/dictionary/dictionary.js}"></script>
+<script th:src="@{/blog/plugins/comment/valid.js}"></script>
+<script th:src="@{/blog/plugins/comment/comment.js}"></script>
+<!-- sweetalert -->
+<script th:src="@{/admin/plugins/sweetalert/sweetalert.min.js}"></script>
+<script type="text/javascript">
+    $(function () {
+        $('pre code').each(function (i, block) {
+            hljs.highlightBlock(block);
+        });
+        //创建博客目录
+        createBlogDirectory("blog-content", "h2", "h3", 20);
+    });
+</script>
+</html>

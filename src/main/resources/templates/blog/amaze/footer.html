@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<footer class="footer blog-footer" th:fragment="footer-fragment">
+    <div class="blog-text-center">
+        &copy;
+        <a th:text="${configurations.get('footerAbout')}">your singal blog.</a>  &nbsp;   • &nbsp;
+        Powered by <a href="https://github.com/ZHENFENG13" target="_blank" th:text="${configurations.get('footerCopyRight')}">2018 十三</a><br/>
+        ICP <a th:text="${configurations.get('footerICP')}">浙ICP备 xxxxxx-x号</a>
+        <span class="ft-warn">&heartsuit;</span>
+        Theme <a rel="friend" href="https://github.com/spiritree/typecho-theme-amaze" target="_blank"> Amaze</a> by <a href="https://github.com/spiritree" target="_blank">spiritree</a> & <a href="https://github.com/zjhch123" target="_blank">Jiahao.Zhang</a>
+    </div>
+</footer>
+</html>

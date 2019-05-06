@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="keyword-list-fragment" class="am-u-lg-8 am-u-sm-12">
+    <main class="articles-list">
+        <div>
+            <th:block th:if="${null != blogPageResult}">
+                <th:block th:each="blog,iterStat : ${blogPageResult.list}">
+                    <article class="am-g blog-entry-article">
+                        <div class="am-u-lg-6 am-u-lg-12 am-u-sm-12 blog-entry-text post-preview">
+                            <div class="topic-header">
+                                <div class="pull-left">
+                                    <div class="blog-flex-center">
+                                        <div class="blog-flex0">
+                                            <img th:src="@{${configurations.get('yourAvatar')}}" alt=""
+                                                 class="link avatar avatar-image">
+                                        </div>
+                                        <div class="author-lockup blog-flex1">
+                                            <a class="link" href="javascript:;"
+                                               th:text="${configurations.get('yourName')}">13</a>
+                                            <span class="in">in</span>
+                                            <span class="category-name">
+                                <a class="category-name" rel="tag" th:href="@{'/category/' + ${blog.blogCategoryName}}"
+                                   th:utext="${blog.blogCategoryName}">
+                                    </a>
+                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <span class="pull-right time pc_time"
+                                      th:text="${#dates.format(blog.createTime, 'yyyy-MM-dd')}">2019-01</span>
+                            </div>
+                            <h1 class="post-index-title"><a itemtype="url" th:href="@{'/blog/' + ${blog.blogId}}">
+                                <th:block th:text="${blog.blogTitle}"></th:block>
+                            </a>
+                            </h1>
+                            <div class="post-content-preview article-body">
+                                <a th:href="@{'/blog/' + ${blog.blogId}}">
+                                    <img th:src="@{${blog.blogCoverImage}}" alt=""></a>
+                            </div>
+                            <div class="clearfix topic-footer">
+                                <span class="pull-left time mobile_time">2018-01</span>
+                            </div>
+                    </article>
+                </th:block>
+            </th:block>
+            <th:block th:if="${null != blogPageResult}">
+                <ul class="am-pagination">
+                    <li th:class="${blogPageResult.currPage==1}?'disabled' : 'am-pagination-prev'"><a
+                            th:href="@{${blogPageResult.currPage==1}?'##':'/'+${pageUrl}+'/'+${keyword}+'/' + ${blogPageResult.currPage-1}}">&laquo;</a>
+                    </li>
+                    <li th:if="${blogPageResult.currPage-3 >=1}"><a
+                            th:href="@{'/'+${pageUrl}+'/'+${keyword}+'/' + ${blogPageResult.currPage-3}}"
+                            th:text="${blogPageResult.currPage -3}">1</a></li>
+                    <li th:if="${blogPageResult.currPage-2 >=1}"><a
+                            th:href="@{'/'+${pageUrl}+'/'+${keyword}+'/' + ${blogPageResult.currPage-2}}"
+                            th:text="${blogPageResult.currPage -2}">1</a></li>
+                    <li th:if="${blogPageResult.currPage-1 >=1}"><a
+                            th:href="@{'/'+${pageUrl}+'/'+${keyword}+'/' + ${blogPageResult.currPage-1}}"
+                            th:text="${blogPageResult.currPage -1}">1</a></li>
+                    <li class="active"><a href="#" th:text="${blogPageResult.currPage}">1</a></li>
+                    <li th:if="${blogPageResult.currPage+1 <=blogPageResult.totalPage}"><a
+                            th:href="@{'/'+${pageUrl}+'/'+${keyword}+'/' + ${blogPageResult.currPage+1}}"
+                            th:text="${blogPageResult.currPage +1}">1</a></li>
+                    <li th:if="${blogPageResult.currPage+2 <=blogPageResult.totalPage}"><a
+                            th:href="@{'/'+${pageUrl}+'/'+${keyword}+'/' + ${blogPageResult.currPage+2}}"
+                            th:text="${blogPageResult.currPage +2}">1</a></li>
+                    <li th:if="${blogPageResult.currPage+3 <=blogPageResult.totalPage}"><a
+                            th:href="@{'/'+${pageUrl}+'/'+${keyword}+'/' + ${blogPageResult.currPage+3}}"
+                            th:text="${blogPageResult.currPage +3}">1</a></li>
+                    <li th:class="${blogPageResult.currPage==blogPageResult.totalPage}?'disabled' : ''">
+                        <a
+                                th:href="@{${blogPageResult.currPage==blogPageResult.totalPage}?'##' : '/'+${pageUrl}+'/'+${keyword}+'/' + ${blogPageResult.currPage+1}}">&raquo;</a>
+                    </li>
+                </ul>
+            </th:block>
+        </div>
+    </main>
+</div>
+</html>
