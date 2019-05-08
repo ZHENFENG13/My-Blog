@@ -9,7 +9,7 @@
 
     <groupId>com.site.blog.my.core</groupId>
     <artifactId>my-blog</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>4.0.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>my-blog</name>
