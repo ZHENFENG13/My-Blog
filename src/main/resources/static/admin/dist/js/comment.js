@@ -37,7 +37,9 @@ $(function () {
             $("#jqGrid").closest(".ui-jqgrid-bdiv").css({"overflow-x": "hidden"});
         }
     });
-
+    $(window).resize(function () {
+        $("#jqGrid").setGridWidth($(".card-body").width());
+    });
     function statusFormatter(cellvalue) {
         if (cellvalue == 0) {
             return "<button type=\"button\" class=\"btn btn-block btn-secondary btn-sm\" style=\"width: 50%;\">待审核</button>";

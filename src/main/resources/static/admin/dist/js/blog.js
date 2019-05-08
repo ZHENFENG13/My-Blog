@@ -38,6 +38,10 @@ $(function () {
         }
     });
 
+    $(window).resize(function () {
+        $("#jqGrid").setGridWidth($(".card-body").width());
+    });
+
     function coverImageFormatter(cellvalue) {
         return "<img src='" + cellvalue + "' height=\"120\" width=\"160\" alt='coverImage'/>";
     }

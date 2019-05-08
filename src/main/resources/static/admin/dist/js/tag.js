@@ -33,7 +33,9 @@ $(function () {
             $("#jqGrid").closest(".ui-jqgrid-bdiv").css({"overflow-x": "hidden"});
         }
     });
-
+    $(window).resize(function () {
+        $("#jqGrid").setGridWidth($(".card-body").width());
+    });
 });
 
 /**

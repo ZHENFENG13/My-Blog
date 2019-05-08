@@ -43,7 +43,9 @@ $(function () {
         hide_select: false,
         show_label: true,
     });
-
+    $(window).resize(function () {
+        $("#jqGrid").setGridWidth($(".card-body").width());
+    });
     var container = jQuery("select.image-picker.masonry").next("ul.thumbnails");
     container.imagesLoaded(function () {
         container.masonry({
