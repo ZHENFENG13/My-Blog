@@ -2,6 +2,14 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <header th:replace="admin/header::header-fragment"></header>
 <body class="hold-transition sidebar-mini">
+<style>
+    .ui-jqgrid tr.jqgrow td {
+        white-space: normal !important;
+        height: auto;
+        vertical-align: text-top;
+        padding-top: 2px;
+    }
+</style>
 <div class="wrapper">
     <!-- 引入页面头header-fragment -->
     <div th:replace="admin/header::header-nav"></div>
