@@ -52,7 +52,7 @@ $('#commentSubmit').click(function () {
         data: data,
         success: function (result) {
             if (result.resultCode == 200) {
-                swal("保存成功", {
+                swal("评论提交成功请等待博主审核", {
                     icon: "success",
                 });
                 $('#commentBody').val('');
