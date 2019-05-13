@@ -105,10 +105,10 @@ My Blog 是由 SpringBoot + Mybatis + Thymeleaf 等技术实现的 Java 博客�
   
 ## 感谢
 
-[spring-projects](https://github.com/spring-projects/spring-boot)
-[ColorlibHQ](https://github.com/ColorlibHQ/AdminLTE)
-[tonytomov](https://github.com/tonytomov/jqGrid)
-[pandao](https://github.com/pandao/editor.md)
-[DONGChuan](https://github.com/DONGChuan/Yummy-Jekyll)
-[zjhch123](https://github.com/zjhch123/solo-skin-amaze)
-[t4t5](https://github.com/t4t5/sweetalert)
+- [spring-projects](https://github.com/spring-projects/spring-boot)
+- [ColorlibHQ](https://github.com/ColorlibHQ/AdminLTE)
+- [tonytomov](https://github.com/tonytomov/jqGrid)
+- [pandao](https://github.com/pandao/editor.md)
+- [DONGChuan](https://github.com/DONGChuan/Yummy-Jekyll)
+- [zjhch123](https://github.com/zjhch123/solo-skin-amaze)
+- [t4t5](https://github.com/t4t5/sweetalert)
