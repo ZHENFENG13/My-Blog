@@ -108,7 +108,7 @@
                                     <div class="meta">
                                         <h3 th:text="${comment.commentator}"></h3>
                                         <span class="date">
-                                       留言时间：<th:block
+                                       评论时间：<th:block
                                                 th:text="${#dates.format(comment.commentCreateTime, 'yyyy-MM-dd HH:mm:ss')}"></th:block>
                                     </span>
                                     </div>
@@ -203,7 +203,7 @@
                                 </div>
                             </div>
                         </div>
-                        <textarea rows="10" name="commentBody" id="commentBody" placeholder="(*必填)请输入你的留言"
+                        <textarea rows="10" name="commentBody" id="commentBody" placeholder="(*必填)请输入你的评论"
                                   class="form-control input-lg"></textarea>
 
                         <div class="buttons clearfix">
