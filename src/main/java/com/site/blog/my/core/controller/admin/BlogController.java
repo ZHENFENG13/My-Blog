@@ -201,7 +201,7 @@ public class BlogController {
         File fileDirectory = new File(filePath);
         try {
             if (!fileDirectory.exists()) {
-                if (!destFile.mkdir()) {
+                if (!fileDirectory.mkdir()) {
                     throw new IOException("文件夹创建失败,路径为：" + fileDirectory);
                 }
             }
