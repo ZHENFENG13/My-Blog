@@ -200,7 +200,7 @@ public class BlogController {
         String fileUrl = MyBlogUtils.getHost(new URI(request.getRequestURL() + "")) + "/md-upload/" + newFileName;
         File fileDirectory = new File(filePath);
         try {
-            if (!destFile.exists()) {
+            if (!fileDirectory.exists()) {
                 if (!destFile.mkdir()) {
                     throw new IOException("文件夹创建失败,路径为：" + fileDirectory);
                 }
