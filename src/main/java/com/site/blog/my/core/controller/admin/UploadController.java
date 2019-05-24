@@ -1,5 +1,6 @@
 package com.site.blog.my.core.controller.admin;
 
+import com.site.blog.my.core.config.Constants;
 import com.site.blog.my.core.util.MyBlogUtils;
 import com.site.blog.my.core.util.Result;
 import com.site.blog.my.core.util.ResultGenerator;
@@ -31,9 +32,6 @@ import java.util.UUID;
 @RequestMapping("/admin")
 public class UploadController {
 
-    private final static String filePath = "/opt/deploy/upload/";
-
-
     @PostMapping({"/upload/file"})
     @ResponseBody
     public Result upload(HttpServletRequest httpServletRequest, @RequestParam("file") MultipartFile file) throws URISyntaxException {
@@ -45,9 +43,9 @@ public class UploadController {
         StringBuilder tempName = new StringBuilder();
         tempName.append(sdf.format(new Date())).append(r.nextInt(100)).append(suffixName);
         String newFileName = tempName.toString();
-        File fileDirectory = new File(filePath);
+        File fileDirectory = new File(Constants.FILE_UPLOAD_DIC);
         //创建文件
-        File destFile = new File(filePath + newFileName);
+        File destFile = new File(Constants.FILE_UPLOAD_DIC + newFileName);
         try {
             if (!fileDirectory.exists()) {
                 if (!fileDirectory.mkdir()) {

@@ -1,5 +1,6 @@
 package com.site.blog.my.core.controller.admin;
 
+import com.site.blog.my.core.config.Constants;
 import com.site.blog.my.core.entity.Blog;
 import com.site.blog.my.core.service.BlogService;
 import com.site.blog.my.core.service.CategoryService;
@@ -34,8 +35,6 @@ import java.util.Random;
 @Controller
 @RequestMapping("/admin")
 public class BlogController {
-
-    private final static String filePath = "/opt/deploy/md-upload/";
 
     @Resource
     private BlogService blogService;
@@ -196,9 +195,9 @@ public class BlogController {
         tempName.append(sdf.format(new Date())).append(r.nextInt(100)).append(suffixName);
         String newFileName = tempName.toString();
         //创建文件
-        File destFile = new File(filePath + newFileName);
-        String fileUrl = MyBlogUtils.getHost(new URI(request.getRequestURL() + "")) + "/md-upload/" + newFileName;
-        File fileDirectory = new File(filePath);
+        File destFile = new File(Constants.FILE_UPLOAD_DIC + newFileName);
+        String fileUrl = MyBlogUtils.getHost(new URI(request.getRequestURL() + "")) + "/upload/" + newFileName;
+        File fileDirectory = new File(Constants.FILE_UPLOAD_DIC);
         try {
             if (!fileDirectory.exists()) {
                 if (!fileDirectory.mkdir()) {

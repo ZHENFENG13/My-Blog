@@ -19,7 +19,6 @@ public class MyBlogWebMvcConfigurer implements WebMvcConfigurer {
     }
 
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/upload/**").addResourceLocations("file:/opt/deploy/upload/");
-        registry.addResourceHandler("/md-upload/**").addResourceLocations("file:/opt/deploy/md-upload/");
+        registry.addResourceHandler("/upload/**").addResourceLocations("file:" + Constants.FILE_UPLOAD_DIC);
     }
 }
