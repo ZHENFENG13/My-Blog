@@ -17,6 +17,7 @@ My Blog 是由 SpringBoot + Mybatis + Thymeleaf 等技术实现的 Java 博客�
 - **My Blog 还有一些不完善的地方，鄙人才疏学浅，望见谅；**
 - **有任何问题都可以反馈给我，我会尽量完善该项目。**
 
+演示视频：https://www.bilibili.com/video/av52551095
 演示站点：http://13blog.site
 
 [![Build Status](https://travis-ci.org/ZHENFENG13/My-Blog.svg?branch=master)](https://travis-ci.org/ZHENFENG13/My-Blog)
