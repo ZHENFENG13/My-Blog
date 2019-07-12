@@ -72,7 +72,7 @@ public class BlogController {
         if (blog == null) {
             return "error/error_400";
         }
-        request.setAttribute("blog", blogService.getBlogById(blogId));
+        request.setAttribute("blog", blog);
         request.setAttribute("categories", categoryService.getAllCategories());
         return "admin/edit";
     }
