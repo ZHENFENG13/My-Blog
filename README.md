@@ -1,6 +1,12 @@
 # My Blog
 
-My Blog 是由 SpringBoot + Mybatis + Thymeleaf 等技术实现的 Java 博客系统，页面美观、功能齐全、部署简单及完善的代码，一定会给使用者无与伦比的体验，如果觉得这个项目不错，可以为它[点赞](https://github.com/ZHENFENG13/My-Blog/stargazers)支持。
+![personal-blog](static-files/personal-blog.png)
+
+**坚持不易，各位朋友如果觉得项目还不错的话可以给项目一个 star 吧，也是对我一直更新代码的一种鼓励啦，谢谢各位的支持。**
+
+![my-blog-info](static-files/my-blog-info.png)
+
+  
 
 - **你可以拿它作为博客模板，因为 My Blog 界面十分美观简洁，满足私人博客的一切要求；**
 - **你也可以把它作为 SpringBoot 技术栈的学习项目，My Blog也足够符合要求，且代码和功能完备；**
