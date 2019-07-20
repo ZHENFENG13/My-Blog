@@ -1,7 +1,7 @@
 package com.site.blog.my.core.service;
 
 import com.site.blog.my.core.controller.vo.BlogDetailVO;
-import com.site.blog.my.core.controller.vo.BlogListVO;
+import com.site.blog.my.core.controller.vo.SimpleBlogListVO;
 import com.site.blog.my.core.entity.Blog;
 import com.site.blog.my.core.util.PageQueryUtil;
 import com.site.blog.my.core.util.PageResult;
@@ -48,8 +48,7 @@ public interface BlogService {
      * @param type
      * @return
      */
-    List<BlogListVO> getBlogListForIndexPage(int type);
-
+    List<SimpleBlogListVO> getBlogListForIndexPage(int type);
     /**
      * 文章详情
      *

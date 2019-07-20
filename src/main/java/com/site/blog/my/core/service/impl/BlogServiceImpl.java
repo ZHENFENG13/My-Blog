@@ -2,6 +2,7 @@ package com.site.blog.my.core.service.impl;
 
 import com.site.blog.my.core.controller.vo.BlogDetailVO;
 import com.site.blog.my.core.controller.vo.BlogListVO;
+import com.site.blog.my.core.controller.vo.SimpleBlogListVO;
 import com.site.blog.my.core.dao.*;
 import com.site.blog.my.core.entity.Blog;
 import com.site.blog.my.core.entity.BlogCategory;
@@ -199,17 +200,17 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
-    public List<BlogListVO> getBlogListForIndexPage(int type) {
-        List<BlogListVO> blogListVOS = new ArrayList<>();
+    public List<SimpleBlogListVO> getBlogListForIndexPage(int type) {
+        List<SimpleBlogListVO> simpleBlogListVOS = new ArrayList<>();
         List<Blog> blogs = blogMapper.findBlogListByType(type, 9);
         if (!CollectionUtils.isEmpty(blogs)) {
             for (Blog blog : blogs) {
-                BlogListVO blogListVO = new BlogListVO();
-                BeanUtils.copyProperties(blog, blogListVO);
-                blogListVOS.add(blogListVO);
+                SimpleBlogListVO simpleBlogListVO = new SimpleBlogListVO();
+                BeanUtils.copyProperties(blog, simpleBlogListVO);
+                simpleBlogListVOS.add(simpleBlogListVO);
             }
         }
-        return blogListVOS;
+        return simpleBlogListVOS;
     }
 
     @Override
