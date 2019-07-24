@@ -10,7 +10,6 @@ body {
     background-size: cover;
     background-attachment: fixed;
     word-break: break-all;
-    white-space: normal !important;
 }
 
 .container {
