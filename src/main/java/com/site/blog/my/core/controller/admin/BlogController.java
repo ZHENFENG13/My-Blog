@@ -205,10 +205,6 @@ public class BlogController {
                 }
             }
             file.transferTo(destFile);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        try {
             request.setCharacterEncoding("utf-8");
             response.setHeader("Content-Type", "text/html");
             response.getWriter().write("{\"success\": 1, \"message\":\"success\",\"url\":\"" + fileUrl + "\"}");

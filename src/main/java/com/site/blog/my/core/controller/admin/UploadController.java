@@ -53,12 +53,13 @@ public class UploadController {
                 }
             }
             file.transferTo(destFile);
+            Result resultSuccess = ResultGenerator.genSuccessResult();
+            resultSuccess.setData(MyBlogUtils.getHost(new URI(httpServletRequest.getRequestURL() + "")) + "/upload/" + newFileName);
+            return resultSuccess;
         } catch (IOException e) {
             e.printStackTrace();
+            return ResultGenerator.genFailResult("文件上传失败");
         }
-        Result result = ResultGenerator.genSuccessResult();
-        result.setData(MyBlogUtils.getHost(new URI(httpServletRequest.getRequestURL() + "")) + "/upload/" + newFileName);
-        return result;
     }
 
 }
