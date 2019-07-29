@@ -8,6 +8,8 @@
     <meta name="viewport" content="width=device-width">
     <link rel="shortcut icon" th:href="@{${configurations.get('websiteIcon')}}"/>
     <link rel="stylesheet" th:href="@{/blog/amaze/css/base.css}">
+    <!-- highlight -->
+    <link rel="stylesheet" th:href="@{/blog/plugins/highlight/styles/github.css}">
 </head>
 <body>
 <div th:replace="blog/amaze/header::nav-fragment"></div>
@@ -173,7 +175,6 @@
 </body>
 <script th:src="@{/blog/default/js/jquery.min.js}"></script>
 <script th:src="@{/blog/plugins/highlight/highlight.pack.js}"></script>
-<script th:src="@{/blog/plugins/dictionary/dictionary.js}"></script>
 <script th:src="@{/blog/plugins/comment/valid.js}"></script>
 <script th:src="@{/blog/plugins/comment/comment.js}"></script>
 <!-- sweetalert -->
