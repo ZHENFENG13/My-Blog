@@ -96,13 +96,13 @@ function validCN_ENString2_100(str) {
 }
 
 /**
- * 用户密码验证 最少6位，最多20位字母或数字的组合
+ * 用户密码验证 最少6位，最多20位字母或数字、特殊字符的组合
  *
  * @param password
  * @returns {boolean}
  */
 function validPassword(password) {
-    var pattern = /^[a-zA-Z0-9]{6,20}$/;
+    var pattern = /^(?![0-9]+$)(?![a-z]+$)(?![A-Z]+$)(?!([^(0-9a-zA-Z)])+$)^.{6,20}$/;
     if (pattern.test(password.trim())) {
         return (true);
     } else {

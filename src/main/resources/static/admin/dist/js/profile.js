@@ -12,14 +12,16 @@ $(function () {
                 url: "/admin/profile/name",
                 data: params,
                 success: function (r) {
-                    console.log(r);
                     if (r == 'success') {
                         alert('修改成功');
                     } else {
                         alert('修改失败');
+                        $("#updateUserNameButton").prop("disabled",false);
                     }
                 }
             });
+        } else {
+            $("#updateUserNameButton").prop("disabled",false);
         }
     });
     //修改密码
@@ -40,9 +42,12 @@ $(function () {
                         window.location.href = '/admin/login';
                     } else {
                         alert('修改失败');
+                        $("#updatePasswordButton").attr("disabled",false);
                     }
                 }
             });
+        } else {
+            $("#updatePasswordButton").attr("disabled",false);
         }
     });
 })
