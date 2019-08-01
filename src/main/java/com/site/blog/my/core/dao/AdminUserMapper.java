@@ -2,9 +2,7 @@ package com.site.blog.my.core.dao;
 
 import com.site.blog.my.core.entity.AdminUser;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.stereotype.Component;
 
-@Component
 public interface AdminUserMapper {
     int insert(AdminUser record);
 

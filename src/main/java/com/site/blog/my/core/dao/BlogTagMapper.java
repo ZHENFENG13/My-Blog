@@ -3,12 +3,8 @@ package com.site.blog.my.core.dao;
 import com.site.blog.my.core.entity.BlogTag;
 import com.site.blog.my.core.entity.BlogTagCount;
 import com.site.blog.my.core.util.PageQueryUtil;
-import org.apache.ibatis.annotations.Param;
-import org.springframework.stereotype.Component;
-
 import java.util.List;
 
-@Component
 public interface BlogTagMapper {
     int deleteByPrimaryKey(Integer tagId);
 
