@@ -49,11 +49,11 @@
         select
         <include refid="Base_Column_List"/>
         from tb_blog_category
-        where category_name = #{categoryName,jdbcType=INTEGER} AND is_deleted = 0
+        where category_name = #{categoryName,jdbcType=VARCHAR} AND is_deleted = 0
     </select>
     <update id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     UPDATE tb_blog_category SET  is_deleted = 1
-    where category_id = #{categoryId,jdbcType=VARCHAR} AND is_deleted = 0
+    where category_id = #{categoryId,jdbcType=INTEGER} AND is_deleted = 0
     </update>
     <update id="deleteBatch">
         update tb_blog_category
