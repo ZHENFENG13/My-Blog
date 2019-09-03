@@ -32,6 +32,8 @@
 
 ### 《SpringBoot + Mybatis + Thymeleaf 搭建美观实用的个人博客》(支付减免优惠券码 LSJdK3KT )
 
+![SpringBoot + Mybatis + Thymeleaf 搭建美观实用的个人博客](static-files/cover-img.png)
+
 - [**第01课：Spring Boot 搭建简洁实用的个人博客系统导读**](https://www.shiyanlou.com/courses/1367)
 - [第02课：快速构建 Spring Boot 应用](https://www.shiyanlou.com/courses/1367)
 - [第03课：Spring Boot 项目开发之web项目开发讲解](https://www.shiyanlou.com/courses/1367)
