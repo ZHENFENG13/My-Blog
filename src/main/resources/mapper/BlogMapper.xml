@@ -40,7 +40,7 @@
         from tb_blog
         where is_deleted=0
         <if test="keyword!=null">
-            AND (blog_title like CONCAT('%','${keyword}','%' ) or blog_category_name like CONCAT('%','${keyword}','%' ))
+            AND (blog_title like CONCAT('%',#{keyword},'%' ) or blog_category_name like CONCAT('%',#{keyword},'%' ))
         </if>
         <if test="blogStatus!=null">
             AND blog_status = #{blogStatus}
@@ -58,7 +58,7 @@
         select count(*) from tb_blog
         where is_deleted=0
         <if test="keyword!=null">
-            AND (blog_title like CONCAT('%','${keyword}','%' ) or blog_category_name like CONCAT('%','${keyword}','%' ))
+            AND (blog_title like CONCAT('%',#{keyword},'%' ) or blog_category_name like CONCAT('%',#{keyword},'%' ))
         </if>
         <if test="blogStatus!=null">
             AND blog_status = #{blogStatus}
