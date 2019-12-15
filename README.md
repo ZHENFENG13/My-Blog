@@ -13,6 +13,10 @@
 
 > 更多 Spring Boot 实战项目可以关注十三的另一个代码仓库 [spring-boot-projects](https://github.com/ZHENFENG13/spring-boot-projects)，该仓库中主要是 Spring Boot 的入门学习教程以及一些常用的 Spring Boot 实战项目教程，包括 Spring Boot 使用的各种示例代码，同时也包括一些实战项目的项目源码和效果展示，实战项目包括基本的 web 开发以及目前大家普遍使用的前后端分离实践项目等，后续会根据大家的反馈继续增加一些实战项目源码，摆脱各种 hello world 入门案例的束缚，真正的掌握 Spring Boot 开发。
 
+关注公众号：**程序员的小故事**，回复"勾搭"进群交流。
+
+![wx-gzh](https://images.gitee.com/uploads/images/2019/1215/232410_90c9d45f_5249807.png)
+
 ## 注意事项
 
 - **数据库文件目录为```static-files/my_blog_db.sql```；**
