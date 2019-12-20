@@ -21,7 +21,7 @@ import java.io.ByteArrayOutputStream;
 @Controller
 public class CommonController {
 
-    @Autowired
+    @Autowired(required = false)
     private DefaultKaptcha captchaProducer;
 
     @GetMapping("/common/kaptcha")

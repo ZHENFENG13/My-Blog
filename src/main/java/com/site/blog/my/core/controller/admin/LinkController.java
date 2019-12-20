@@ -1,6 +1,7 @@
 package com.site.blog.my.core.controller.admin;
 
 import com.site.blog.my.core.entity.BlogLink;
+import com.site.blog.my.core.service.ConfigService;
 import com.site.blog.my.core.service.LinkService;
 import com.site.blog.my.core.util.PageQueryUtil;
 import com.site.blog.my.core.util.Result;
@@ -25,10 +26,13 @@ public class LinkController {
 
     @Resource
     private LinkService linkService;
+    @Resource
+    private ConfigService configService;
 
     @GetMapping("/links")
     public String linkPage(HttpServletRequest request) {
         request.setAttribute("path", "links");
+        request.setAttribute("configurations", configService.getAllConfigs());
         return "admin/link";
     }
 

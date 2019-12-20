@@ -15,9 +15,9 @@ import java.util.List;
 @Service
 public class CategoryServiceImpl implements CategoryService {
 
-    @Autowired
+    @Autowired(required = false)
     private BlogCategoryMapper blogCategoryMapper;
-    @Autowired
+    @Autowired(required = false)
     private BlogMapper blogMapper;
 
     @Override

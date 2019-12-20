@@ -14,23 +14,25 @@ import java.util.stream.Collectors;
 
 @Service
 public class ConfigServiceImpl implements ConfigService {
-    @Autowired
+    @Autowired(required = false)
     private BlogConfigMapper configMapper;
 
     public static final String websiteName = "personal blog";
-    public static final String websiteDescription = "personal blog是SpringBoot2+Thymeleaf+Mybatis建造的个人博客网站.SpringBoot实战博客源码.个人博客搭建";
+    public static final String websiteTitle = "我不怕千万人阻挡,只怕自己投降";
+    public static final String websiteDescription = "SpringBoot2+Thymeleaf+Mybatis建造的个人博客网站";
     public static final String websiteLogo = "/admin/dist/img/logo2.png";
     public static final String websiteIcon = "/admin/dist/img/favicon.png";
 
     public static final String yourAvatar = "/admin/dist/img/13.png";
-    public static final String yourEmail = "2449207463@qq.com";
-    public static final String yourName = "十三";
+    public static final String yourEmail = "email@example.com";
+    public static final String yourName = "你的名字";
 
     public static final String footerAbout = "your personal blog. have fun.";
-    public static final String footerICP = "浙ICP备 xxxxxx-x号";
+    public static final String footerICP = "某ICP备 xxxxxx-x号";
     public static final String footerCopyRight = "@2018 十三";
-    public static final String footerPoweredBy = "personal blog";
-    public static final String footerPoweredByURL = "##";
+    public static final String footerPoweredBy = "十三";
+    public static final String footerPoweredByURL = "https://github.com/ZHENFENG13";
+    public static final String yourURL = "#";
 
     @Override
     public int updateConfig(String configName, String configValue) {
@@ -61,6 +63,9 @@ public class ConfigServiceImpl implements ConfigService {
             if ("websiteIcon".equals(config.getKey()) && StringUtils.isEmpty(config.getValue())) {
                 config.setValue(websiteIcon);
             }
+            if ("websiteTitle".equals(config.getKey()) && StringUtils.isEmpty(config.getValue())) {
+                config.setValue(websiteTitle);
+            }
             if ("yourAvatar".equals(config.getKey()) && StringUtils.isEmpty(config.getValue())) {
                 config.setValue(yourAvatar);
             }
@@ -84,6 +89,12 @@ public class ConfigServiceImpl implements ConfigService {
             }
             if ("footerPoweredByURL".equals(config.getKey()) && StringUtils.isEmpty(config.getValue())) {
                 config.setValue(footerPoweredByURL);
+            }
+            if ("yourURL".equals(config.getKey()) && StringUtils.isEmpty(config.getValue())) {
+                config.setValue(yourURL);
+            }
+            if ("yourUrlCategory".equals(config.getKey()) && StringUtils.isEmpty(config.getValue())) {
+                config.setValue("");
             }
         }
         return configMap;

@@ -4,6 +4,7 @@ import com.site.blog.my.core.config.Constants;
 import com.site.blog.my.core.entity.Blog;
 import com.site.blog.my.core.service.BlogService;
 import com.site.blog.my.core.service.CategoryService;
+import com.site.blog.my.core.service.ConfigService;
 import com.site.blog.my.core.util.MyBlogUtils;
 import com.site.blog.my.core.util.PageQueryUtil;
 import com.site.blog.my.core.util.Result;
@@ -40,6 +41,8 @@ public class BlogController {
     private BlogService blogService;
     @Resource
     private CategoryService categoryService;
+    @Resource
+    private ConfigService configService;
 
     @GetMapping("/blogs/list")
     @ResponseBody
@@ -55,6 +58,7 @@ public class BlogController {
     @GetMapping("/blogs")
     public String list(HttpServletRequest request) {
         request.setAttribute("path", "blogs");
+        request.setAttribute("configurations", configService.getAllConfigs());
         return "admin/blog";
     }
 
@@ -62,6 +66,7 @@ public class BlogController {
     public String edit(HttpServletRequest request) {
         request.setAttribute("path", "edit");
         request.setAttribute("categories", categoryService.getAllCategories());
+        request.setAttribute("configurations", configService.getAllConfigs());
         return "admin/edit";
     }
 
@@ -74,6 +79,7 @@ public class BlogController {
         }
         request.setAttribute("blog", blog);
         request.setAttribute("categories", categoryService.getAllCategories());
+        request.setAttribute("configurations", configService.getAllConfigs());
         return "admin/edit";
     }
 

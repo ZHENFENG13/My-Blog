@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 @Service
 public class LinkServiceImpl implements LinkService {
 
-    @Autowired
+    @Autowired(required = false)
     private BlogLinkMapper blogLinkMapper;
 
     @Override

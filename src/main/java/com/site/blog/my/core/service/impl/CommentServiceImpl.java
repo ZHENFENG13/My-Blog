@@ -16,7 +16,7 @@ import java.util.Map;
 
 @Service
 public class CommentServiceImpl implements CommentService {
-    @Autowired
+    @Autowired(required = false)
     private BlogCommentMapper blogCommentMapper;
 
     @Override

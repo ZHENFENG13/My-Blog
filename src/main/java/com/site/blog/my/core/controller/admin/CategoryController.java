@@ -1,6 +1,7 @@
 package com.site.blog.my.core.controller.admin;
 
 import com.site.blog.my.core.service.CategoryService;
+import com.site.blog.my.core.service.ConfigService;
 import com.site.blog.my.core.util.PageQueryUtil;
 import com.site.blog.my.core.util.Result;
 import com.site.blog.my.core.util.ResultGenerator;
@@ -24,10 +25,13 @@ public class CategoryController {
 
     @Resource
     private CategoryService categoryService;
+    @Resource
+    private ConfigService configService;
 
     @GetMapping("/categories")
     public String categoryPage(HttpServletRequest request) {
         request.setAttribute("path", "categories");
+        request.setAttribute("configurations", configService.getAllConfigs());
         return "admin/category";
     }
 

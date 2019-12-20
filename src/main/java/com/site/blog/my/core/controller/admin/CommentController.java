@@ -1,6 +1,7 @@
 package com.site.blog.my.core.controller.admin;
 
 import com.site.blog.my.core.service.CommentService;
+import com.site.blog.my.core.service.ConfigService;
 import com.site.blog.my.core.util.PageQueryUtil;
 import com.site.blog.my.core.util.Result;
 import com.site.blog.my.core.util.ResultGenerator;
@@ -24,6 +25,8 @@ public class CommentController {
 
     @Resource
     private CommentService commentService;
+    @Resource
+    private ConfigService configService;
 
     @GetMapping("/comments/list")
     @ResponseBody
@@ -78,6 +81,7 @@ public class CommentController {
     @GetMapping("/comments")
     public String list(HttpServletRequest request) {
         request.setAttribute("path", "comments");
+        request.setAttribute("configurations", configService.getAllConfigs());
         return "admin/comment";
     }
 

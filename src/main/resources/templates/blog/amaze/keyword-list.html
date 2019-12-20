@@ -45,8 +45,8 @@
             </th:block>
             <th:block th:if="${null != blogPageResult}">
                 <ul class="am-pagination">
-                    <li th:class="${blogPageResult.currPage==1}?'disabled' : 'am-pagination-prev'"><a
-                            th:href="@{${blogPageResult.currPage==1}?'##':'/'+${pageUrl}+'/'+${keyword}+'/' + ${blogPageResult.currPage-1}}">&laquo;</a>
+                    <li th:class="${blogPageResult.currPage==1}?'disabled' : 'am-pagination-prev'">
+                        <a th:href="@{${blogPageResult.currPage==1}?'##':'/'+${pageUrl}+'/'+${keyword}+'/' + ${blogPageResult.currPage-1}}">&laquo;</a>
                     </li>
                     <li th:if="${blogPageResult.currPage-3 >=1}"><a
                             th:href="@{'/'+${pageUrl}+'/'+${keyword}+'/' + ${blogPageResult.currPage-3}}"
@@ -68,8 +68,7 @@
                             th:href="@{'/'+${pageUrl}+'/'+${keyword}+'/' + ${blogPageResult.currPage+3}}"
                             th:text="${blogPageResult.currPage +3}">1</a></li>
                     <li th:class="${blogPageResult.currPage==blogPageResult.totalPage}?'disabled' : ''">
-                        <a
-                                th:href="@{${blogPageResult.currPage==blogPageResult.totalPage}?'##' : '/'+${pageUrl}+'/'+${keyword}+'/' + ${blogPageResult.currPage+1}}">&raquo;</a>
+                        <a th:href="@{${blogPageResult.currPage==blogPageResult.totalPage || blogPageResult.totalPage == 0}?'##' : '/'+${pageUrl}+'/'+${keyword}+'/' + ${blogPageResult.currPage+1}}">&raquo;</a>
                     </li>
                 </ul>
             </th:block>

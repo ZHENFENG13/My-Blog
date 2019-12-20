@@ -32,6 +32,8 @@ public class AdminController {
     private TagService tagService;
     @Resource
     private CommentService commentService;
+    @Resource
+    private ConfigService configService;
 
 
     @GetMapping({"/login"})
@@ -53,6 +55,7 @@ public class AdminController {
         request.setAttribute("linkCount", linkService.getTotalLinks());
         request.setAttribute("tagCount", tagService.getTotalTags());
         request.setAttribute("commentCount", commentService.getTotalComments());
+        request.setAttribute("configurations", configService.getAllConfigs());
         request.setAttribute("path", "index");
         return "admin/index";
     }
@@ -98,6 +101,7 @@ public class AdminController {
         request.setAttribute("path", "profile");
         request.setAttribute("loginUserName", adminUser.getLoginUserName());
         request.setAttribute("nickName", adminUser.getNickName());
+        request.setAttribute("configurations", configService.getAllConfigs());
         return "admin/profile";
     }
 

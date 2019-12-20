@@ -20,7 +20,7 @@ public class ErrorPageController implements ErrorController {
 
     private static ErrorPageController errorPageController;
 
-    @Autowired
+    @Autowired(required = false)
     private ErrorAttributes errorAttributes;
 
     private final static String ERROR_PATH = "/error";

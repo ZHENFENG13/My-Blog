@@ -10,7 +10,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class MyBlogWebMvcConfigurer implements WebMvcConfigurer {
 
-    @Autowired
+    @Autowired(required = false)
     private AdminLoginInterceptor adminLoginInterceptor;
 
     public void addInterceptors(InterceptorRegistry registry) {

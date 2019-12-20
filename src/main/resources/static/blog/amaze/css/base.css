@@ -2184,7 +2184,12 @@
  a:focus {
    color: #42b983
  }
- 
+
+ .blog-text-left {
+     text-align: left;
+     /*font-size: px;*/
+ }
+
  .blog-text-center {
    text-align: center;
    font-size: 14px;

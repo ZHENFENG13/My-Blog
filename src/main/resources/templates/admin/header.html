@@ -3,7 +3,7 @@
 <head th:fragment="header-fragment">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>my personal blog | 后台管理系统</title>
+    <title th:text="|${configurations.get('websiteName')} - 后台管理系统|">主页</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Font Awesome -->
@@ -36,6 +36,7 @@
                 <i class="fa fa-paper-plane">&nbsp;&nbsp;博客首页</i>
             </a>
         </li>
+        <!-- 作者信息
         <li class="nav-item dropdown">
             <a class="nav-link" data-toggle="dropdown" href="#">
                 <i class="fa fa-user">&nbsp;&nbsp;作者</i>
@@ -58,6 +59,7 @@
                 </a>
             </div>
         </li>
+        -->
     </ul>
 </nav>
 <!-- /.navbar -->

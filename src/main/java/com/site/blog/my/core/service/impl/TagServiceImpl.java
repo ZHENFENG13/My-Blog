@@ -17,9 +17,9 @@ import java.util.List;
 @Service
 public class TagServiceImpl implements TagService {
 
-    @Autowired
+    @Autowired(required = false)
     private BlogTagMapper blogTagMapper;
-    @Autowired
+    @Autowired(required = false)
     private BlogTagRelationMapper relationMapper;
 
     @Override

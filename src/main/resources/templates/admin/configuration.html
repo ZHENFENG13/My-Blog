@@ -52,6 +52,12 @@
                                                name="websiteIcon"
                                                placeholder="favicon.ico">
                                     </div>
+                                    <div class="form-group">
+                                        <label>网站标语</label>
+                                        <input type="text" class="form-control" id="websiteTitle"
+                                               name="websiteTitle" th:value="${configurations.get('websiteTitle')}"
+                                               placeholder="网站标语">
+                                    </div>
                                     <div class="card-footer">
                                         <button type="button" id="updateWebsiteButton" onsubmit="return false;"
                                                 class="btn btn-danger float-right">确认修改
@@ -86,6 +92,18 @@
                                         <input type="email" class="form-control" id="yourEmail" name="yourEmail"
                                                th:value="${configurations.get('yourEmail')}"
                                                placeholder="个人邮箱">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label">个人链接</label>
+                                        <input type="text" class="form-control" id="yourURL" name="yourURL"
+                                               th:value="${configurations.get('yourURL')}"
+                                               placeholder="个人地址">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label">链接类型</label>
+                                        <input type="text" class="form-control" id="yourUrlCategory" name="yourUrlCategory"
+                                               th:value="${configurations.get('yourUrlCategory')}"
+                                               placeholder="链接类型">
                                     </div>
                                     <div class="card-footer">
                                         <button type="button" id="updateUserInfoButton" onsubmit="return false;"

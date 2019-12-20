@@ -207,6 +207,10 @@ insert  into `tb_config`(`config_name`,`config_value`,`create_time`,`update_time
 insert  into `tb_config`(`config_name`,`config_value`,`create_time`,`update_time`) values ('yourAvatar','/admin/dist/img/13.png','2018-11-11 20:33:14','2019-05-07 21:56:23');
 insert  into `tb_config`(`config_name`,`config_value`,`create_time`,`update_time`) values ('yourEmail','2449207463@qq.com','2018-11-11 20:33:17','2019-05-07 21:56:23');
 insert  into `tb_config`(`config_name`,`config_value`,`create_time`,`update_time`) values ('yourName','13','2018-11-11 20:33:20','2019-05-07 21:56:23');
+insert  into `tb_config`(`config_name`,`config_value`,`create_time`,`update_time`) values ('yourURL','www.baidu.com','2018-11-11 20:33:20','2019-05-07 21:56:23');
+insert  into `tb_config`(`config_name`,`config_value`,`create_time`,`update_time`) values ('websiteTitle','我不怕千万人阻挡,只怕自己投降','2018-11-11 20:33:20','2019-05-07 21:56:23');
+insert  into `tb_config`(`config_name`,`config_value`,`create_time`,`update_time`) values ('yourUrlCategory','百度','2018-11-11 20:33:20','2019-05-07 21:56:23');
+
 
 /*Table structure for table `tb_link` */
 

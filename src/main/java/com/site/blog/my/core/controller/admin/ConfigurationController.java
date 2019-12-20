@@ -35,7 +35,8 @@ public class ConfigurationController {
     public Result website(@RequestParam(value = "websiteName", required = false) String websiteName,
                           @RequestParam(value = "websiteDescription", required = false) String websiteDescription,
                           @RequestParam(value = "websiteLogo", required = false) String websiteLogo,
-                          @RequestParam(value = "websiteIcon", required = false) String websiteIcon) {
+                          @RequestParam(value = "websiteIcon", required = false) String websiteIcon,
+                          @RequestParam(value = "websiteTitle", required = false) String websiteTitle) {
         int updateResult = 0;
         if (!StringUtils.isEmpty(websiteName)) {
             updateResult += configService.updateConfig("websiteName", websiteName);
@@ -49,6 +50,9 @@ public class ConfigurationController {
         if (!StringUtils.isEmpty(websiteIcon)) {
             updateResult += configService.updateConfig("websiteIcon", websiteIcon);
         }
+        if (!StringUtils.isEmpty(websiteTitle)) {
+            updateResult += configService.updateConfig("websiteTitle", websiteTitle);
+        }
         return ResultGenerator.genSuccessResult(updateResult > 0);
     }
 
@@ -56,7 +60,9 @@ public class ConfigurationController {
     @ResponseBody
     public Result userInfo(@RequestParam(value = "yourAvatar", required = false) String yourAvatar,
                            @RequestParam(value = "yourName", required = false) String yourName,
-                           @RequestParam(value = "yourEmail", required = false) String yourEmail) {
+                           @RequestParam(value = "yourEmail", required = false) String yourEmail,
+                           @RequestParam(value = "yourURL", required = false) String yourURL,
+                           @RequestParam(value = "yourUrlCategory",required = false) String yourUrlCategory) {
         int updateResult = 0;
         if (!StringUtils.isEmpty(yourAvatar)) {
             updateResult += configService.updateConfig("yourAvatar", yourAvatar);
@@ -66,6 +72,12 @@ public class ConfigurationController {
         }
         if (!StringUtils.isEmpty(yourEmail)) {
             updateResult += configService.updateConfig("yourEmail", yourEmail);
+        }
+        if (!StringUtils.isEmpty(yourURL)) {
+            updateResult += configService.updateConfig("yourURL", yourURL);
+        }
+        if (!StringUtils.isEmpty(yourUrlCategory)) {
+            updateResult += configService.updateConfig("yourUrlCategory", yourUrlCategory);
         }
         return ResultGenerator.genSuccessResult(updateResult > 0);
     }

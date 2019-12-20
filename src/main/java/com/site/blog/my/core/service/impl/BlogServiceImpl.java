@@ -26,15 +26,15 @@ import java.util.stream.Collectors;
 @Service
 public class BlogServiceImpl implements BlogService {
 
-    @Autowired
+    @Autowired(required = false)
     private BlogMapper blogMapper;
-    @Autowired
+    @Autowired(required = false)
     private BlogCategoryMapper categoryMapper;
-    @Autowired
+    @Autowired(required = false)
     private BlogTagMapper tagMapper;
-    @Autowired
+    @Autowired(required = false)
     private BlogTagRelationMapper blogTagRelationMapper;
-    @Autowired
+    @Autowired(required = false)
     private BlogCommentMapper blogCommentMapper;
 
     @Override

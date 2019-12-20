@@ -1,5 +1,6 @@
 package com.site.blog.my.core.controller.admin;
 
+import com.site.blog.my.core.service.ConfigService;
 import com.site.blog.my.core.service.TagService;
 import com.site.blog.my.core.util.PageQueryUtil;
 import com.site.blog.my.core.util.Result;
@@ -24,10 +25,13 @@ public class TagController {
 
     @Resource
     private TagService tagService;
+    @Resource
+    private ConfigService configService;
 
     @GetMapping("/tags")
     public String tagPage(HttpServletRequest request) {
         request.setAttribute("path", "tags");
+        request.setAttribute("configurations", configService.getAllConfigs());
         return "admin/tag";
     }
 
