@@ -42,7 +42,8 @@ public class AdminController {
     }
 
     @GetMapping({"/test"})
-    public String test() {
+    public String test(HttpServletRequest request) {
+        request.setAttribute("configurations", configService.getAllConfigs());
         return "admin/test";
     }
 
