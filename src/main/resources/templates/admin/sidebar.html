@@ -91,6 +91,13 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a th:href="@{/admin/theme}"
+                       th:class="${path}=='configurations'?'nav-link active':'nav-link'">
+                        <i class="fa fa-star nav-icon"></i>
+                        <p>主题切换</p>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a th:href="@{/admin/profile}"
                        th:class="${path}=='profile'?'nav-link active':'nav-link'">
                         <i class="fa fa-user-secret nav-icon"></i>

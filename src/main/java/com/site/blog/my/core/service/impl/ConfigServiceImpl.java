@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -35,6 +36,20 @@ public class ConfigServiceImpl implements ConfigService {
     public static final String yourURL = "#";
 
     @Override
+    public int insert(@NotNull String configName, String configValue) {
+        BlogConfig blogConfig = configMapper.selectByPrimaryKey(configName);
+        if(blogConfig == null){
+            blogConfig = new BlogConfig();
+            blogConfig.setConfigName(configName);
+            blogConfig.setConfigValue(configValue);
+            blogConfig.setCreateTime(new Date());
+            blogConfig.setUpdateTime(new Date());
+            return configMapper.insert(blogConfig);
+        }
+        return 0;
+    }
+
+    @Override
     public int updateConfig(String configName, String configValue) {
         BlogConfig blogConfig = configMapper.selectByPrimaryKey(configName);
         if (blogConfig != null) {
@@ -43,6 +58,11 @@ public class ConfigServiceImpl implements ConfigService {
             return configMapper.updateByPrimaryKeySelective(blogConfig);
         }
         return 0;
+    }
+
+    @Override
+    public BlogConfig selectByConfigName(String configName) {
+        return configMapper.selectByPrimaryKey(configName);
     }
 
     @Override

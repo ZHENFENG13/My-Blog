@@ -11,4 +11,9 @@ public interface BlogConfigMapper {
 
     int updateByPrimaryKeySelective(BlogConfig record);
 
+    /**
+     * 插入配置
+     */
+    int insert (BlogConfig theme);
+
 }
