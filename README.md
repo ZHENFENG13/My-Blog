@@ -26,12 +26,16 @@
 - **My Blog 还有一些不完善的地方，鄙人才疏学浅，望见谅；**
 - **有任何问题都可以反馈给我，我会尽量完善该项目。**
 
-演示视频：https://www.bilibili.com/video/av52551095
-演示站点：http://13blog.site
-
 [![Build Status](https://travis-ci.org/ZHENFENG13/My-Blog.svg?branch=master)](https://travis-ci.org/ZHENFENG13/My-Blog)
 ![Version 4.0.0](https://img.shields.io/badge/version-4.0.0-yellow.svg)
 [![License](https://img.shields.io/badge/license-apache-blue.svg)](https://github.com/ZHENFENG13/My-Blog/blob/master/LICENSE)
+
+## 项目演示
+
+- [视频1：My-Blog博客项目简介](https://edu.csdn.net/course/play/29029/406882)
+- [视频2：My-Blog博客项目系统演示-1](https://edu.csdn.net/course/play/29029/405864)
+- [视频3：My-Blog博客项目系统演示-2](https://edu.csdn.net/course/play/29029/405865)
+- [视频4：博客项目预览](https://www.bilibili.com/video/av52551095)
 
 ## 开发文档
 
