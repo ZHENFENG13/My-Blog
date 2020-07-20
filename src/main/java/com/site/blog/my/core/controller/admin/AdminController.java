@@ -39,12 +39,6 @@ public class AdminController {
         return "admin/login";
     }
 
-    @GetMapping({"/test"})
-    public String test() {
-        return "admin/test";
-    }
-
-
     @GetMapping({"", "/", "/index", "/index.html"})
     public String index(HttpServletRequest request) {
         request.setAttribute("path", "index");
@@ -53,7 +47,6 @@ public class AdminController {
         request.setAttribute("linkCount", linkService.getTotalLinks());
         request.setAttribute("tagCount", tagService.getTotalTags());
         request.setAttribute("commentCount", commentService.getTotalComments());
-        request.setAttribute("path", "index");
         return "admin/index";
     }
 
