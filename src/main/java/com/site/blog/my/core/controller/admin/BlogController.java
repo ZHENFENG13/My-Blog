@@ -187,7 +187,13 @@ public class BlogController {
                                      @RequestParam(name = "editormd-image-file", required = true)
                                              MultipartFile file) throws IOException, URISyntaxException {
         String fileName = file.getOriginalFilename();
-        String suffixName = fileName.substring(fileName.lastIndexOf("."));
+        if (StringUtils.isEmpty(fileName)) {
+            throw new IllegalArgumentException("文件名为空");
+        }
+
+        int suffixIndex = fileName.lastIndexOf(".");
+        String suffixName = suffixIndex != -1 ? fileName.substring(suffixIndex) : "unknown";
+
         //生成文件名称通用方法
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss");
         Random r = new Random();
