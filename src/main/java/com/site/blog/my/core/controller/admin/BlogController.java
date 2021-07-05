@@ -214,8 +214,6 @@ public class BlogController {
             request.setCharacterEncoding("utf-8");
             response.setHeader("Content-Type", "text/html");
             response.getWriter().write("{\"success\": 1, \"message\":\"success\",\"url\":\"" + fileUrl + "\"}");
-        } catch (UnsupportedEncodingException e) {
-            response.getWriter().write("{\"success\":0}");
         } catch (IOException e) {
             response.getWriter().write("{\"success\":0}");
         }
