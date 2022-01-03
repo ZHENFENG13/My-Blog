@@ -86,6 +86,7 @@ $('#saveButton').click(function () {
     }
     var params = $("#linkForm").serialize();
     var url = '/admin/links/save';
+    var linkId = getSelectedRowWithoutAlert();
     if (linkId != null && linkId > 0) {
         url = '/admin/links/update';
     }
