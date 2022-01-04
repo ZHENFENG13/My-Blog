@@ -187,6 +187,7 @@ function reset() {
     $("#linkUrl").val('');
     $("#linkDescription").val('');
     $("#linkRank").val(0);
+    $("#linkId").val(0);
     $('#edit-error-msg').css("display", "none");
     $("#linkType option:first").prop("selected", 'selected');
 }
