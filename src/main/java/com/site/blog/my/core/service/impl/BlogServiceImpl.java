@@ -76,7 +76,9 @@ public class BlogServiceImpl implements BlogService {
             if (!CollectionUtils.isEmpty(tagListForInsert)) {
                 tagMapper.batchInsertBlogTag(tagListForInsert);
             }
-            categoryMapper.updateByPrimaryKeySelective(blogCategory);
+            if (blogCategory != null) {
+                categoryMapper.updateByPrimaryKeySelective(blogCategory);
+            }
             List<BlogTagRelation> blogTagRelations = new ArrayList<>();
             //新增关系数据
             allTagsList.addAll(tagListForInsert);
@@ -175,7 +177,9 @@ public class BlogServiceImpl implements BlogService {
             blogTagRelations.add(blogTagRelation);
         }
         //修改blog信息->修改分类排序值->删除原关系数据->保存新的关系数据
-        categoryMapper.updateByPrimaryKeySelective(blogCategory);
+        if (blogCategory != null) {
+            categoryMapper.updateByPrimaryKeySelective(blogCategory);
+        }
         blogTagRelationMapper.deleteByBlogId(blog.getBlogId());
         blogTagRelationMapper.batchInsert(blogTagRelations);
         if (blogMapper.updateByPrimaryKeySelective(blogForUpdate) > 0) {
