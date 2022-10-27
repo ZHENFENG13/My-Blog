@@ -125,8 +125,8 @@
 /** Post List **/
 .post-list-item {
     position: relative;
-    padding-top: 30px;
-    padding-bottom: 30px;
+    padding-top: 24px;
+    padding-bottom: 24px;
     list-style: none;
     border-bottom: 1px solid #eee;
 }
@@ -136,10 +136,14 @@
 }
 
 .post-list-cover-img {
-    margin-top: 8px;
+    margin-top: 16px;
     margin-bottom: 0;
     font-size: 18px;
     color: #666;
+}
+
+.post-list-cover-img img{
+    max-width: 100%;
 }
 
 .post-list-meta {
