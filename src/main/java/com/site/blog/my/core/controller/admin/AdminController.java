@@ -1,5 +1,6 @@
 package com.site.blog.my.core.controller.admin;
 
+import cn.hutool.captcha.ShearCaptcha;
 import com.site.blog.my.core.entity.AdminUser;
 import com.site.blog.my.core.service.*;
 import org.springframework.stereotype.Controller;
@@ -63,8 +64,8 @@ public class AdminController {
             session.setAttribute("errorMsg", "用户名或密码不能为空");
             return "admin/login";
         }
-        String kaptchaCode = session.getAttribute("verifyCode") + "";
-        if (StringUtils.isEmpty(kaptchaCode) || !verifyCode.equals(kaptchaCode)) {
+        ShearCaptcha shearCaptcha = (ShearCaptcha) session.getAttribute("verifyCode");
+        if (shearCaptcha == null || !shearCaptcha.verify(verifyCode)) {
             session.setAttribute("errorMsg", "验证码错误");
             return "admin/login";
         }
