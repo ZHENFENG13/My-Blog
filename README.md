@@ -6,6 +6,14 @@
 
 ![my-blog-info](static-files/my-blog-info.png)
 
+当前分支的 Spring Boot 版本为 2.7.5，想要学习和使用其它版本可以直接点击下方的分支名称跳转至对应的仓库分支中。
+
+| 分支名称                                                    | Spring Boot Version |
+| ------------------------------------------------------------ | ------------------- |
+| [spring-boot-2.3.7](https://github.com/ZHENFENG13/My-Blog/tree/spring-boot-2.3.7) | 2.3.7-RELEASE       |
+| [main](https://github.com/ZHENFENG13/My-Blog)            | 2.7.5               |
+| [spring-boot-3.x](https://github.com/ZHENFENG13/My-Blog/tree/spring-boot-3.x) | 3.0.0       |
+
 - **你可以拿它作为博客模板，因为 My Blog 界面十分美观简洁，满足私人博客的一切要求；**
 - **你也可以把它作为 SpringBoot 技术栈的学习项目，My Blog也足够符合要求，且代码和功能完备；**
 - **内置三套博客主题模板，主题风格各有千秋，满足大家的选择空间，后续会继续增加，以供大家打造自己的博客；**
