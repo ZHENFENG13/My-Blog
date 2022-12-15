@@ -6,7 +6,7 @@ import com.site.blog.my.core.service.AdminUserService;
 import com.site.blog.my.core.util.MD5Util;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 
 @Service
 public class AdminUserServiceImpl implements AdminUserService {
