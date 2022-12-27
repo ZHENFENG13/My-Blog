@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<div th:replace="blog/yummy-jekyll/header::header('详情页','详情')"></div>
+<div th:replace="~{blog/yummy-jekyll/header::header('详情页','详情')}"></div>
 <body>
 <div class="content">
     <section class="jumbotron"
@@ -155,7 +155,7 @@
     </article>
 </div>
 </body>
-<div th:replace="blog/yummy-jekyll/footer::footer"></div>
+<div th:replace="~{blog/yummy-jekyll/footer::footer}"></div>
 <!-- highlight -->
 <link rel="stylesheet" th:href="@{/blog/plugins/highlight/styles/github.css}">
 <!-- dictionary -->

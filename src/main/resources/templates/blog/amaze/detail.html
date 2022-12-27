@@ -29,7 +29,7 @@
 
 </head>
 <body>
-<div th:replace="blog/amaze/header::nav-fragment"></div>
+<div th:replace="~{blog/amaze/header::nav-fragment}"></div>
 <header th:fragment="header-fragment" class="intro-header"
         th:style="'background-image:url(' + @{/blog/amaze/images/header.jpg} + ');'">
     <div class="container">
@@ -188,7 +188,7 @@
     </th:block>
     <p class="back-top" id="back-top" style="display:none"><a href="#top"><span></span></a></p>
 </div>
-<footer th:replace="blog/amaze/footer::footer-fragment"></footer>
+<footer th:replace="~{blog/amaze/footer::footer-fragment}"></footer>
 </body>
 <script th:src="@{/blog/default/js/jquery.min.js}"></script>
 <script th:src="@{/blog/plugins/highlight/highlight.pack.js}"></script>

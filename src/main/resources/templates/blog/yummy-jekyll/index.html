@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<div th:replace="blog/yummy-jekyll/header::header('首页','My Blog')"></div>
+<div th:replace="~{blog/yummy-jekyll/header::header('首页','My Blog')}"></div>
 <body>
 <div class="content">
     <section class="jumbotron">
@@ -110,5 +110,5 @@
     </section>
 </div>
 </body>
-<div th:replace="blog/yummy-jekyll/footer::footer"></div>
+<div th:replace="~{blog/yummy-jekyll/footer::footer}"></div>
 </html>
