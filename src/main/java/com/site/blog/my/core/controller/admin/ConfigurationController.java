@@ -37,16 +37,16 @@ public class ConfigurationController {
                           @RequestParam(value = "websiteLogo", required = false) String websiteLogo,
                           @RequestParam(value = "websiteIcon", required = false) String websiteIcon) {
         int updateResult = 0;
-        if (!StringUtils.isEmpty(websiteName)) {
+        if (StringUtils.hasText(websiteName)) {
             updateResult += configService.updateConfig("websiteName", websiteName);
         }
-        if (!StringUtils.isEmpty(websiteDescription)) {
+        if (StringUtils.hasText(websiteDescription)) {
             updateResult += configService.updateConfig("websiteDescription", websiteDescription);
         }
-        if (!StringUtils.isEmpty(websiteLogo)) {
+        if (StringUtils.hasText(websiteLogo)) {
             updateResult += configService.updateConfig("websiteLogo", websiteLogo);
         }
-        if (!StringUtils.isEmpty(websiteIcon)) {
+        if (StringUtils.hasText(websiteIcon)) {
             updateResult += configService.updateConfig("websiteIcon", websiteIcon);
         }
         return ResultGenerator.genSuccessResult(updateResult > 0);
@@ -58,13 +58,13 @@ public class ConfigurationController {
                            @RequestParam(value = "yourName", required = false) String yourName,
                            @RequestParam(value = "yourEmail", required = false) String yourEmail) {
         int updateResult = 0;
-        if (!StringUtils.isEmpty(yourAvatar)) {
+        if (StringUtils.hasText(yourAvatar)) {
             updateResult += configService.updateConfig("yourAvatar", yourAvatar);
         }
-        if (!StringUtils.isEmpty(yourName)) {
+        if (StringUtils.hasText(yourName)) {
             updateResult += configService.updateConfig("yourName", yourName);
         }
-        if (!StringUtils.isEmpty(yourEmail)) {
+        if (StringUtils.hasText(yourEmail)) {
             updateResult += configService.updateConfig("yourEmail", yourEmail);
         }
         return ResultGenerator.genSuccessResult(updateResult > 0);
@@ -78,19 +78,19 @@ public class ConfigurationController {
                          @RequestParam(value = "footerPoweredBy", required = false) String footerPoweredBy,
                          @RequestParam(value = "footerPoweredByURL", required = false) String footerPoweredByURL) {
         int updateResult = 0;
-        if (!StringUtils.isEmpty(footerAbout)) {
+        if (StringUtils.hasText(footerAbout)) {
             updateResult += configService.updateConfig("footerAbout", footerAbout);
         }
-        if (!StringUtils.isEmpty(footerICP)) {
+        if (StringUtils.hasText(footerICP)) {
             updateResult += configService.updateConfig("footerICP", footerICP);
         }
-        if (!StringUtils.isEmpty(footerCopyRight)) {
+        if (StringUtils.hasText(footerCopyRight)) {
             updateResult += configService.updateConfig("footerCopyRight", footerCopyRight);
         }
-        if (!StringUtils.isEmpty(footerPoweredBy)) {
+        if (StringUtils.hasText(footerPoweredBy)) {
             updateResult += configService.updateConfig("footerPoweredBy", footerPoweredBy);
         }
-        if (!StringUtils.isEmpty(footerPoweredByURL)) {
+        if (StringUtils.hasText(footerPoweredByURL)) {
             updateResult += configService.updateConfig("footerPoweredByURL", footerPoweredByURL);
         }
         return ResultGenerator.genSuccessResult(updateResult > 0);

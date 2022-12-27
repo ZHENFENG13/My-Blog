@@ -9,6 +9,7 @@ import com.site.blog.my.core.util.PageQueryUtil;
 import com.site.blog.my.core.util.Result;
 import com.site.blog.my.core.util.ResultGenerator;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -44,7 +45,7 @@ public class BlogController {
     @GetMapping("/blogs/list")
     @ResponseBody
     public Result list(@RequestParam Map<String, Object> params) {
-        if (StringUtils.isEmpty(params.get("page")) || StringUtils.isEmpty(params.get("limit"))) {
+        if (ObjectUtils.isEmpty(params.get("page")) || ObjectUtils.isEmpty(params.get("limit"))) {
             return ResultGenerator.genFailResult("参数异常！");
         }
         PageQueryUtil pageUtil = new PageQueryUtil(params);
@@ -87,13 +88,13 @@ public class BlogController {
                        @RequestParam("blogCoverImage") String blogCoverImage,
                        @RequestParam("blogStatus") Byte blogStatus,
                        @RequestParam("enableComment") Byte enableComment) {
-        if (StringUtils.isEmpty(blogTitle)) {
+        if (!StringUtils.hasText(blogTitle)) {
             return ResultGenerator.genFailResult("请输入文章标题");
         }
         if (blogTitle.trim().length() > 150) {
             return ResultGenerator.genFailResult("标题过长");
         }
-        if (StringUtils.isEmpty(blogTags)) {
+        if (!StringUtils.hasText(blogTags)) {
             return ResultGenerator.genFailResult("请输入文章标签");
         }
         if (blogTags.trim().length() > 150) {
@@ -102,13 +103,13 @@ public class BlogController {
         if (blogSubUrl.trim().length() > 150) {
             return ResultGenerator.genFailResult("路径过长");
         }
-        if (StringUtils.isEmpty(blogContent)) {
+        if (!StringUtils.hasText(blogContent)) {
             return ResultGenerator.genFailResult("请输入文章内容");
         }
         if (blogTags.trim().length() > 100000) {
             return ResultGenerator.genFailResult("文章内容过长");
         }
-        if (StringUtils.isEmpty(blogCoverImage)) {
+        if (!StringUtils.hasText(blogCoverImage)) {
             return ResultGenerator.genFailResult("封面图不能为空");
         }
         Blog blog = new Blog();
@@ -139,13 +140,13 @@ public class BlogController {
                          @RequestParam("blogCoverImage") String blogCoverImage,
                          @RequestParam("blogStatus") Byte blogStatus,
                          @RequestParam("enableComment") Byte enableComment) {
-        if (StringUtils.isEmpty(blogTitle)) {
+        if (!StringUtils.hasText(blogTitle)) {
             return ResultGenerator.genFailResult("请输入文章标题");
         }
         if (blogTitle.trim().length() > 150) {
             return ResultGenerator.genFailResult("标题过长");
         }
-        if (StringUtils.isEmpty(blogTags)) {
+        if (!StringUtils.hasText(blogTags)) {
             return ResultGenerator.genFailResult("请输入文章标签");
         }
         if (blogTags.trim().length() > 150) {
@@ -154,13 +155,13 @@ public class BlogController {
         if (blogSubUrl.trim().length() > 150) {
             return ResultGenerator.genFailResult("路径过长");
         }
-        if (StringUtils.isEmpty(blogContent)) {
+        if (!StringUtils.hasText(blogContent)) {
             return ResultGenerator.genFailResult("请输入文章内容");
         }
         if (blogTags.trim().length() > 100000) {
             return ResultGenerator.genFailResult("文章内容过长");
         }
-        if (StringUtils.isEmpty(blogCoverImage)) {
+        if (!StringUtils.hasText(blogCoverImage)) {
             return ResultGenerator.genFailResult("封面图不能为空");
         }
         Blog blog = new Blog();

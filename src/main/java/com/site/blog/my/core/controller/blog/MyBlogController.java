@@ -224,7 +224,7 @@ public class MyBlogController {
                           @RequestParam Long blogId, @RequestParam String verifyCode,
                           @RequestParam String commentator, @RequestParam String email,
                           @RequestParam String websiteUrl, @RequestParam String commentBody) {
-        if (StringUtils.isEmpty(verifyCode)) {
+        if (!StringUtils.hasText(verifyCode)) {
             return ResultGenerator.genFailResult("验证码不能为空");
         }
         ShearCaptcha shearCaptcha = (ShearCaptcha) session.getAttribute("verifyCode");
@@ -232,22 +232,22 @@ public class MyBlogController {
             return ResultGenerator.genFailResult("验证码错误");
         }
         String ref = request.getHeader("Referer");
-        if (StringUtils.isEmpty(ref)) {
+        if (!StringUtils.hasText(ref)) {
             return ResultGenerator.genFailResult("非法请求");
         }
         if (null == blogId || blogId < 0) {
             return ResultGenerator.genFailResult("非法请求");
         }
-        if (StringUtils.isEmpty(commentator)) {
+        if (!StringUtils.hasText(commentator)) {
             return ResultGenerator.genFailResult("请输入称呼");
         }
-        if (StringUtils.isEmpty(email)) {
+        if (!StringUtils.hasText(email)) {
             return ResultGenerator.genFailResult("请输入邮箱地址");
         }
         if (!PatternUtil.isEmail(email)) {
             return ResultGenerator.genFailResult("请输入正确的邮箱地址");
         }
-        if (StringUtils.isEmpty(commentBody)) {
+        if (!StringUtils.hasText(commentBody)) {
             return ResultGenerator.genFailResult("请输入评论内容");
         }
         if (commentBody.trim().length() > 200) {
