@@ -5,6 +5,7 @@ import com.site.blog.my.core.util.PageQueryUtil;
 import com.site.blog.my.core.util.Result;
 import com.site.blog.my.core.util.ResultGenerator;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
@@ -37,7 +38,7 @@ public class CategoryController {
     @RequestMapping(value = "/categories/list", method = RequestMethod.GET)
     @ResponseBody
     public Result list(@RequestParam Map<String, Object> params) {
-        if (StringUtils.isEmpty(params.get("page")) || StringUtils.isEmpty(params.get("limit"))) {
+        if (ObjectUtils.isEmpty(params.get("page")) || ObjectUtils.isEmpty(params.get("limit"))) {
             return ResultGenerator.genFailResult("参数异常！");
         }
         PageQueryUtil pageUtil = new PageQueryUtil(params);
@@ -51,10 +52,10 @@ public class CategoryController {
     @ResponseBody
     public Result save(@RequestParam("categoryName") String categoryName,
                        @RequestParam("categoryIcon") String categoryIcon) {
-        if (StringUtils.isEmpty(categoryName)) {
+        if (!StringUtils.hasText(categoryName)) {
             return ResultGenerator.genFailResult("请输入分类名称！");
         }
-        if (StringUtils.isEmpty(categoryIcon)) {
+        if (!StringUtils.hasText(categoryIcon)) {
             return ResultGenerator.genFailResult("请选择分类图标！");
         }
         if (categoryService.saveCategory(categoryName, categoryIcon)) {
@@ -73,10 +74,10 @@ public class CategoryController {
     public Result update(@RequestParam("categoryId") Integer categoryId,
                          @RequestParam("categoryName") String categoryName,
                          @RequestParam("categoryIcon") String categoryIcon) {
-        if (StringUtils.isEmpty(categoryName)) {
+        if (!StringUtils.hasText(categoryName)) {
             return ResultGenerator.genFailResult("请输入分类名称！");
         }
-        if (StringUtils.isEmpty(categoryIcon)) {
+        if (!StringUtils.hasText(categoryIcon)) {
             return ResultGenerator.genFailResult("请选择分类图标！");
         }
         if (categoryService.updateCategory(categoryId, categoryName, categoryIcon)) {

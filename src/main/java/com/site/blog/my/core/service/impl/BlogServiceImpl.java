@@ -325,7 +325,7 @@ public class BlogServiceImpl implements BlogService {
             }
             //分类信息
             blogDetailVO.setBlogCategoryIcon(blogCategory.getCategoryIcon());
-            if (!StringUtils.isEmpty(blog.getBlogTags())) {
+            if (StringUtils.hasText(blog.getBlogTags())) {
                 //标签设置
                 List<String> tags = Arrays.asList(blog.getBlogTags().split(","));
                 blogDetailVO.setBlogTags(tags);

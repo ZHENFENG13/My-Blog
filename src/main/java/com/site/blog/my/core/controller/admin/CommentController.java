@@ -5,6 +5,7 @@ import com.site.blog.my.core.util.PageQueryUtil;
 import com.site.blog.my.core.util.Result;
 import com.site.blog.my.core.util.ResultGenerator;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,7 +29,7 @@ public class CommentController {
     @GetMapping("/comments/list")
     @ResponseBody
     public Result list(@RequestParam Map<String, Object> params) {
-        if (StringUtils.isEmpty(params.get("page")) || StringUtils.isEmpty(params.get("limit"))) {
+        if (ObjectUtils.isEmpty(params.get("page")) || ObjectUtils.isEmpty(params.get("limit"))) {
             return ResultGenerator.genFailResult("参数异常！");
         }
         PageQueryUtil pageUtil = new PageQueryUtil(params);
@@ -52,7 +53,7 @@ public class CommentController {
     @ResponseBody
     public Result checkDone(@RequestParam("commentId") Long commentId,
                             @RequestParam("replyBody") String replyBody) {
-        if (commentId == null || commentId < 1 || StringUtils.isEmpty(replyBody)) {
+        if (commentId == null || commentId < 1 || !StringUtils.hasText(replyBody)) {
             return ResultGenerator.genFailResult("参数异常！");
         }
         if (commentService.reply(commentId, replyBody)) {

@@ -5,6 +5,7 @@ import com.site.blog.my.core.util.PageQueryUtil;
 import com.site.blog.my.core.util.Result;
 import com.site.blog.my.core.util.ResultGenerator;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,7 +35,7 @@ public class TagController {
     @GetMapping("/tags/list")
     @ResponseBody
     public Result list(@RequestParam Map<String, Object> params) {
-        if (StringUtils.isEmpty(params.get("page")) || StringUtils.isEmpty(params.get("limit"))) {
+        if (ObjectUtils.isEmpty(params.get("page")) || ObjectUtils.isEmpty(params.get("limit"))) {
             return ResultGenerator.genFailResult("参数异常！");
         }
         PageQueryUtil pageUtil = new PageQueryUtil(params);
@@ -45,7 +46,7 @@ public class TagController {
     @PostMapping("/tags/save")
     @ResponseBody
     public Result save(@RequestParam("tagName") String tagName) {
-        if (StringUtils.isEmpty(tagName)) {
+        if (!StringUtils.hasText(tagName)) {
             return ResultGenerator.genFailResult("参数异常！");
         }
         if (tagService.saveTag(tagName)) {
