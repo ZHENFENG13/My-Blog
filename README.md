@@ -6,13 +6,13 @@
 
 ![my-blog-info](static-files/my-blog-info.png)
 
-当前分支的 Spring Boot 版本为 3.0.0，Java 最低版本要求为 17，想要学习和使用其它版本可以直接点击下方的分支名称跳转至对应的仓库分支中。
+当前分支的 Spring Boot 版本为 3.x，Java 最低版本要求为 17，想要学习和使用其它版本可以直接点击下方的分支名称跳转至对应的仓库分支中。
 
 | 分支名称                                                    | Spring Boot Version |
 | ------------------------------------------------------------ | ------------------- |
 | [spring-boot-2.3.7](https://github.com/ZHENFENG13/My-Blog/tree/spring-boot-2.3.7) | 2.3.7-RELEASE       |
 | [main](https://github.com/ZHENFENG13/My-Blog)            | 2.7.5               |
-| [spring-boot-3.x](https://github.com/ZHENFENG13/My-Blog/tree/spring-boot-3.x) | 3.0.0       |
+| [spring-boot-3.x](https://github.com/ZHENFENG13/My-Blog/tree/spring-boot-3.x) | 3.1.0       |
 
 - **你可以拿它作为博客模板，因为 My Blog 界面十分美观简洁，满足私人博客的一切要求；**
 - **你也可以把它作为 SpringBoot 技术栈的学习项目，My Blog也足够符合要求，且代码和功能完备；**
