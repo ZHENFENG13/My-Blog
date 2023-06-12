@@ -25,9 +25,12 @@
     </select>
 
     <select id="selectDistinctTagIds" resultType="java.lang.Long">
-        select
-        DISTINCT(tag_id)
-        from tb_blog_tag_relation
+        SELECT DISTINCT
+        ( tr.tag_id )
+        FROM
+        tb_blog AS tb
+        LEFT JOIN tb_blog_tag_relation AS tr ON tb.blog_id = tr.blog_id
+        AND tb.is_deleted = '0'
         where tag_id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}

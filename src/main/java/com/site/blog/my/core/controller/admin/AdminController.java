@@ -20,6 +20,7 @@ import javax.servlet.http.HttpSession;
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
+    private static final String LOGIN_INDEX = "admin/login";
 
     @Resource
     private AdminUserService adminUserService;
@@ -37,7 +38,7 @@ public class AdminController {
 
     @GetMapping({"/login"})
     public String login() {
-        return "admin/login";
+        return LOGIN_INDEX;
     }
 
     @GetMapping({"", "/", "/index", "/index.html"})
@@ -58,16 +59,16 @@ public class AdminController {
                         HttpSession session) {
         if (!StringUtils.hasText(verifyCode)) {
             session.setAttribute("errorMsg", "验证码不能为空");
-            return "admin/login";
+            return LOGIN_INDEX;
         }
         if (!StringUtils.hasText(userName) || !StringUtils.hasText(password)) {
             session.setAttribute("errorMsg", "用户名或密码不能为空");
-            return "admin/login";
+            return LOGIN_INDEX;
         }
         ShearCaptcha shearCaptcha = (ShearCaptcha) session.getAttribute("verifyCode");
         if (shearCaptcha == null || !shearCaptcha.verify(verifyCode)) {
             session.setAttribute("errorMsg", "验证码错误");
-            return "admin/login";
+            return LOGIN_INDEX;
         }
         AdminUser adminUser = adminUserService.login(userName, password);
         if (adminUser != null) {
@@ -78,7 +79,7 @@ public class AdminController {
             return "redirect:/admin/index";
         } else {
             session.setAttribute("errorMsg", "登陆失败");
-            return "admin/login";
+            return LOGIN_INDEX;
         }
     }
 
@@ -87,7 +88,7 @@ public class AdminController {
         Integer loginUserId = (int) request.getSession().getAttribute("loginUserId");
         AdminUser adminUser = adminUserService.getUserDetailById(loginUserId);
         if (adminUser == null) {
-            return "admin/login";
+            return LOGIN_INDEX;
         }
         request.setAttribute("path", "profile");
         request.setAttribute("loginUserName", adminUser.getLoginUserName());
@@ -134,6 +135,6 @@ public class AdminController {
         request.getSession().removeAttribute("loginUserId");
         request.getSession().removeAttribute("loginUser");
         request.getSession().removeAttribute("errorMsg");
-        return "admin/login";
+        return LOGIN_INDEX;
     }
 }

@@ -5,10 +5,10 @@ import com.site.blog.my.core.entity.BlogComment;
 import com.site.blog.my.core.service.CommentService;
 import com.site.blog.my.core.util.PageQueryUtil;
 import com.site.blog.my.core.util.PageResult;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
+import javax.annotation.Resource;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -16,7 +16,7 @@ import java.util.Map;
 
 @Service
 public class CommentServiceImpl implements CommentService {
-    @Autowired
+    @Resource
     private BlogCommentMapper blogCommentMapper;
 
     @Override

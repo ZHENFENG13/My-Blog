@@ -4,22 +4,21 @@ import com.site.blog.my.core.dao.BlogTagMapper;
 import com.site.blog.my.core.dao.BlogTagRelationMapper;
 import com.site.blog.my.core.entity.BlogTag;
 import com.site.blog.my.core.entity.BlogTagCount;
-import com.site.blog.my.core.entity.BlogTagRelation;
 import com.site.blog.my.core.service.TagService;
 import com.site.blog.my.core.util.PageQueryUtil;
 import com.site.blog.my.core.util.PageResult;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 @Service
 public class TagServiceImpl implements TagService {
 
-    @Autowired
+    @Resource
     private BlogTagMapper blogTagMapper;
-    @Autowired
+    @Resource
     private BlogTagRelationMapper relationMapper;
 
     @Override
