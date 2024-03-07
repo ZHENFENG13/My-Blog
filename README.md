@@ -92,6 +92,25 @@
 - [My-Blog in GitHub](https://github.com/ZHENFENG13/My-Blog)
 - [My-Blog in Gitee](https://gitee.com/zhenfeng13/My-Blog)
 
+##使用方法
+分享一下详细的运行流程~
+1.前端配置：
+项目使用了 Bootstrap、jQuery。确保这些前端库已正确引入和配置。
+2.后端配置：
+项目使用了 MySQL 数据库。您需要在 application.properties 文件中配置数据库连接信息。
+MySQL 配置：
+数据库连接URL：jdbc:mysql://localhost:3306/my_blog_db?useUnicode=true&characterEncoding=utf8&autoReconnect=true&useSSL=false&serverTimezone=UTC
+用户名：<local_username>
+密码：<local_password>
+3.登录网站
+服务器端口号：28083，启动成功后访问 http://localhost:28083，用户名和密码在数据库的用户信息表中。
+4.后端框架：
+后端框架是 Spring Boot 框架。
+5.导入 SQL 文件：
+项目需要导入 my_blog_db.sql 文件到数据库中。您可以使用数据库管理工具或命令行工具执行该 SQL 文件。
+6.启动项目：
+项目的启动方式是直接点击 Application.java 文件启动。确保您的开发环境配置正确，项目的依赖项已经安装。
+
 ## 效果预览
 
 ### 后台管理页面
